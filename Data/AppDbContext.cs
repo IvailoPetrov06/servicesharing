@@ -8,6 +8,7 @@ namespace servicesharing.Data
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
+
         }
     }
 }

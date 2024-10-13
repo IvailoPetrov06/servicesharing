@@ -6,7 +6,7 @@ using servicesharing.Models;
 using servicesharing.ViewModels;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace servicesharing.Controllers
+namespace UsersApp.Controllers
 {
     public class AccountController : Controller
     {
