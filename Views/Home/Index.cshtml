@@ -1,18 +1,48 @@
 ﻿@{
-    ViewBag.Title = "Service Sharing Platform";
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout"; // Задаваме шаблона за оформление
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewBag.Title</title>
-    <link href="~/Content/Site.css" rel="stylesheet" />
-</head>
-<body>
-    <footer>
-    </footer>
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to ServiceSharing</h1>
+    <p class="lead">Your one-stop solution for finding and reserving reliable services and expert mechanics.</p>
+    <hr class="my-4" />
+    <p>Get started by exploring our services or booking an appointment with a trusted professional.</p>
+    <a class="btn btn-primary btn-lg" asp-controller="Service" asp-action="List" role="button">Explore Services</a>
+</div>
 
-</body>
-</html>
+<div class="container mt-5">
+    <h2 class="mb-4">Our Top Services</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="~/images/mechanic.jpg" alt="Mechanic Service">
+                <div class="card-body">
+                    <h5 class="card-title">Professional Mechanics</h5>
+                    <p class="card-text">Get your vehicle inspected and serviced by our experienced mechanics.</p>
+                    <a class="btn btn-secondary" asp-controller="Mechanic" asp-action="List">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="~/images/service.jpg" alt="Service Reservation">
+                <div class="card-body">
+                    <h5 class="card-title">Reservation</h5> <!-- Заглавие на секцията -->
+                    <p class="card-text"></p> <!-- Описанието е премахнато -->
+                    <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Create">Book Now</a> <!-- Асп контролер и действие за резервация -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="~/images/privacy.jpg" alt="Privacy">
+                <div class="card-body">
+                    <h5 class="card-title">Privacy and Trust</h5>
+                    <p class="card-text">Learn more about how we protect your data and provide a secure environment.</p>
+                    <a class="btn btn-secondary" asp-controller="Home" asp-action="Privacy">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

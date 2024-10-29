@@ -1,32 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using servicesharing.Models;
-using System.Diagnostics;
 
 namespace servicesharing.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult Mechanic()
+        {
+            // Връщане на изглед за механика
+            return View();
+        }
+
+        public IActionResult Service()
+        {
+            // Връщане на изглед за услугите
+            return View();
+        }
+
+        public IActionResult Reservation()
+        {
+            // Връщане на изглед за резервация
             return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿@model List<servicesharing.ViewModels.MechanicProfileViewModel>
+
+<h1>Списък с механики</h1>
+<ul>
+    @foreach (var mechanic in Model)
+    {
+        <li>
+            <a asp-controller="Mechanic" asp-action="Profile" asp-route-id="@mechanic.Id">@mechanic.Name</a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,19 @@
+﻿@model servicesharing.ViewModels.MechanicProfileViewModel
+
+<h1>Профил на механика: @Model.Name</h1>
+<p>Опит: @Model.Experience години</p>
+
+<h2>Услуги</h2>
+@if (Model.Services != null && Model.Services.Any())
+{
+    <ul>
+        @foreach (var service in Model.Services)
+        {
+            <li>@service.Name</li> <!-- Или каквото е подходящо -->
+        }
+    </ul>
+}
+else
+{
+    <p>Няма налични услуги.</p>
+}

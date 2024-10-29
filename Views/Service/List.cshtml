@@ -1,0 +1,30 @@
+﻿@model List<servicesharing.ViewModels.ServiceViewModel>
+
+@{
+    ViewData["Title"] = "Списък с услуги";
+}
+
+<h2>Списък с услуги</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Име на услуга</th>
+            <th>Описание</th>
+            <th>Цена</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model)
+        {
+            <tr>
+                <td>@service.Name</td>
+                <td>@service.Description</td>
+                <td>@service.Price лв.</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@service.Id">Детайли</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
