@@ -14,5 +14,6 @@ namespace servicesharing.ViewModels
 
         [Required(ErrorMessage = "Дата и час на резервация е задължителна.")]
         public DateTime ReservationDate { get; set; }
+
     }
 }
