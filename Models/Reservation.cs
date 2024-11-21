@@ -7,11 +7,9 @@ namespace servicesharing.Models
     {
        
         public int Id { get; set; }
-        
         public int ServiceId { get; set; }
-        
         public string CustomerEmail { get; set; }
-        
         public DateTime ReservationDate { get; set; }
+       
     }
 }

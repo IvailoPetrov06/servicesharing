@@ -6,6 +6,13 @@
 
 <h2>@ViewData["Title"]</h2>
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
@@ -15,35 +22,48 @@
 
 <form method="post">
     <div class="form-group">
-        <label asp-for="ServiceId" class="control-label"></label>
-
+        <!-- Проверка дали има услуги за показване в падащото меню -->
         @if (ViewData["Services"] != null && ((List<servicesharing.Models.Service>)ViewData["Services"]).Any())
         {
-            <select asp-for="ServiceId" class="form-control" asp-items="@(new SelectList(ViewData["Services"] as List<servicesharing.Models.Service>, "Id", "Name", Model.ServiceId))"></select>
+            <label for="ServiceId">Услуга</label>
+            <select asp-for="ServiceId" class="form-control" asp-items="@(new SelectList(ViewData["Services"] as List<servicesharing.Models.Service>, "Id", "Name", Model.ServiceId))">
+            </select>
         }
         else
         {
             <p>Няма налични услуги.</p>
         }
-
         <span asp-validation-for="ServiceId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="CustomerEmail" class="control-label"></label>
+        <label asp-for="CustomerEmail" class="control-label">Имейл на клиента</label>
         <input asp-for="CustomerEmail" class="form-control" />
         <span asp-validation-for="CustomerEmail" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="ReservationDate" class="control-label"></label>
-        <input asp-for="ReservationDate" class="form-control" />
+        <label asp-for="ReservationDate" class="control-label">Дата на резервацията</label>
+        <input asp-for="ReservationDate" class="form-control" type="datetime-local" />
         <span asp-validation-for="ReservationDate" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Запази промени</button>
 </form>
 
+<!-- Връзка към списъка с резервации -->
 <div>
     <a asp-action="Index">Назад към списъка с резервации</a>
 </div>
+
+<!-- Показване на избраната услуга (заедно с нейното име) -->
+@if (Model.ServiceId != null && ViewData["Services"] != null)
+{
+    var selectedService = ((List<servicesharing.Models.Service>)ViewData["Services"]).FirstOrDefault(s => s.Id == Model.ServiceId);
+    if (selectedService != null)
+    {
+        <div class="mt-3">
+            <strong>Избрана услуга: </strong> @selectedService.Name
+        </div>
+    }
+}

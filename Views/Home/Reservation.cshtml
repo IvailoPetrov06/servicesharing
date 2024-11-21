@@ -1,4 +1,177 @@
-﻿@model servicesharing.Models.Reservation
+﻿<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резервация - ServiceSharing</title>
+    <style>
+        /* Общи стилове */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
 
-<h1>Reservation</h1>
-<p>This is the Reservation page.</p>
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                font-size: 1.2em;
+                margin-bottom: 8px;
+            }
+
+            .form-group input, .form-group select, .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                font-size: 1em;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            .form-group button {
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 1.2em;
+                cursor: pointer;
+            }
+
+                .form-group button:hover {
+                    background-color: #45a049;
+                }
+
+        .service-info {
+            background-color: #f1f1f1;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+            .service-info h3 {
+                margin-top: 0;
+                font-size: 1.8em;
+                color: #333;
+            }
+
+            .service-info p {
+                color: #555;
+            }
+
+        /* Footer */
+        footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1rem;
+            border-top: 1px solid #2c3e50;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+            footer p {
+                margin: 0;
+            }
+
+            footer a {
+                color: #ecf0f1;
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    text-decoration: underline;
+                }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Резервация на услуга</h1>
+        <p>Изберете услуга, време и попълнете данни за резервация.</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Резервационната форма -->
+        <form id="reservationForm">
+            <div class="form-group">
+                <label for="customerName">Вашето име</label>
+                <input type="text" id="customerName" name="customerName" required>
+            </div>
+            <div class="form-group">
+                <label for="customerEmail">Електронна поща</label>
+                <input type="email" id="customerEmail" name="customerEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="reservationDate">Дата и час</label>
+                <input type="datetime-local" id="reservationDate" name="reservationDate" required>
+            </div>
+            <div class="form-group">
+                <label for="service">Изберете услуга</label>
+                <select id="service" name="service" required>
+                    <option value="engine-repair">Ремонт на двигател</option>
+                    <option value="oil-change">Смяна на масло</option>
+                    <option value="tire-change">Смяна на гуми</option>
+                    <option value="diagnostic">Диагностика</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="specialRequest">Специални изисквания</label>
+                <textarea id="specialRequest" name="specialRequest" rows="4" placeholder="Добавете бележки или специални изисквания тук..."></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Резервирай сега</button>
+            </div>
+        </form>
+
+        <!-- Потвърждение на резервацията -->
+        <div class="confirmation" id="confirmationMessage" style="display: none;">
+            <h3>Вашата резервация</h3>
+            <p><strong>Име:</strong> <span id="confirmName"></span></p>
+            <p><strong>Услуга:</strong> <span id="confirmService"></span></p>
+            <p><strong>Дата и час:</strong> <span id="confirmDate"></span></p>
+            <p><strong>Специални изисквания:</strong> <span id="confirmRequest"></span></p>
+            <p>Резервацията ви беше успешно приета. Очаквайте потвърждение.</p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript за обработка на формата
+        document.getElementById('reservationForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Прекратяваме стандартното изпращане на формата
+
+            // Вземаме стойностите от формата
+            var name = document.getElementById('customerName').value;
+            var email = document.getElementById('customerEmail').value;
+            var date = document.getElementById('reservationDate').value;
+            var service = document.getElementById('service').value;
+            var request = document.getElementById('specialRequest').value;
+
+            // Показваме потвърждението с данните
+            document.getElementById('confirmName').textContent = name;
+            document.getElementById('confirmService').textContent = service;
+            document.getElementById('confirmDate').textContent = date;
+            document.getElementById('confirmRequest').textContent = request || 'Няма специални изисквания';
+
+            // Скриваме формата и показваме потвърждението
+            document.getElementById('reservationForm').style.display = 'none';
+            document.getElementById('confirmationMessage').style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>

@@ -1,4 +1,176 @@
-﻿@model servicesharing.Models.Service
+﻿<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги - ServiceSharing</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Общи стилове */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes up full viewport height */
+        }
 
-<h1>Service</h1>
-<p>This is the Service page.</p>
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-grow: 1; /* Makes sure container grows to fill available space */
+        }
+
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+            .service-card:hover {
+                transform: scale(1.05);
+            }
+
+            .service-card img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+
+            .service-card h3 {
+                margin: 15px 0;
+                font-size: 1.8em;
+                color: #333;
+            }
+
+            .service-card p {
+                color: #777;
+            }
+
+            .service-card .price {
+                font-size: 1.2em;
+                color: #4CAF50;
+                margin: 10px 0;
+            }
+
+            .service-card .book-btn {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .service-card .book-btn:hover {
+                    background-color: #45a049;
+                }
+
+        /* Стилове за футера */
+        footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1rem;
+            border-top: 1px solid #2c3e50;
+            width: 100%;
+        }
+
+            footer p {
+                margin: 0;
+                font-size: 1rem;
+            }
+
+            footer a {
+                color: #ecf0f1;
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    text-decoration: underline;
+                }
+
+        /* Филтриране */
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+            .filters select, .filters input {
+                padding: 8px;
+                font-size: 1em;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Услуги за Автосервизи</h1>
+        <p>Намерете и резервирайте услуги за вашето превозно средство с лекота.</p>
+    </header>
+
+    <div class="container">
+        <div class="filters">
+            <select id="service-category">
+                <option value="">Категория</option>
+                <option value="repair">Ремонт на двигатели</option>
+                <option value="tires">Смяна на гуми</option>
+                <option value="oil-change">Смяна на масло</option>
+                <option value="diagnostic">Диагностика</option>
+            </select>
+            <input type="text" id="service-search" placeholder="Търсене по услуга..." />
+        </div>
+
+        <section class="services">
+            <!-- Примерна услуга 1 -->
+            <div class="service-card">
+                <img src="service1.jpg" alt="Ремонт на двигател">
+                <h3>Ремонт на двигател</h3>
+                <p>Професионален ремонт на двигатели за всички видове автомобили.</p>
+                <p class="price">Цена: 100 лв</p>
+                <button class="book-btn" onclick="window.location.href='/reservation'">Резервирай сега</button>
+            </div>
+
+            <!-- Примерна услуга 2 -->
+            <div class="service-card">
+                <img src="service2.jpg" alt="Смяна на гуми">
+                <h3>Смяна на гуми</h3>
+                <p>Бързо и лесно сменяме гумите на вашето превозно средство.</p>
+                <p class="price">Цена: 50 лв</p>
+                <button class="book-btn" onclick="window.location.href='/reservation'">Резервирай сега</button>
+            </div>
+
+            <!-- Примерна услуга 3 -->
+            <div class="service-card">
+                <img src="service3.jpg" alt="Диагностика на автомобил">
+                <h3>Диагностика на автомобил</h3>
+                <p>Откриване на проблеми и диагностика на вашето превозно средство.</p>
+                <p class="price">Цена: 30 лв</p>
+                <button class="book-btn" onclick="window.location.href='/reservation'">Резервирай сега</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

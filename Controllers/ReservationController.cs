@@ -2,6 +2,7 @@
 using servicesharing.Data;
 using servicesharing.Models;
 using servicesharing.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace servicesharing.Controllers
 {
@@ -24,7 +25,7 @@ namespace servicesharing.Controllers
         // GET: Reservation/Create
         public IActionResult Create()
         {
-            // Зареждаме услугите в ViewData
+            // Load services into ViewData for the dropdown
             ViewData["Services"] = _context.Services.ToList();
             return View();
         }
@@ -38,9 +39,12 @@ namespace servicesharing.Controllers
             {
                 _context.Reservations.Add(model);
                 _context.SaveChanges();
-                TempData["SuccessMessage"] = "Резервацията е успешно създадена!";
+                TempData["SuccessMessage"] = "Reservation successfully created!";
                 return RedirectToAction("Index");
             }
+
+            // Reload services if there's an error
+            ViewData["Services"] = _context.Services.ToList();
             return View(model);
         }
 
@@ -60,10 +64,9 @@ namespace servicesharing.Controllers
                 ReservationDate = reservation.ReservationDate
             };
 
-            // Зареждаме услугите в ViewData
+            // Зареждаме всички услуги от базата данни и ги подаваме към ViewData
             ViewData["Services"] = _context.Services.ToList();
-
-            return View(model);  // Подаваме ReservationViewModel на изгледа
+            return View(model);
         }
 
         // POST: Reservation/Edit/5
@@ -79,7 +82,15 @@ namespace servicesharing.Controllers
                     return NotFound();
                 }
 
-                // Обновяваме стойностите на резервацията
+                // Уверяваме се, че е избрана валидна услуга
+                if (model.ServiceId == null || model.ServiceId == 0)
+                {
+                    ModelState.AddModelError("ServiceId", "Моля, изберете валидна услуга.");
+                    ViewData["Services"] = _context.Services.ToList();
+                    return View(model);
+                }
+
+                // Обновяваме резервацията с новите стойности
                 reservation.ServiceId = model.ServiceId;
                 reservation.CustomerEmail = model.CustomerEmail;
                 reservation.ReservationDate = model.ReservationDate;
@@ -91,7 +102,9 @@ namespace servicesharing.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(model);  // Връщаме модела, ако има грешка
+            // Ако има грешка, презареждаме услугите и връщаме потребителя към формата с текущите данни
+            ViewData["Services"] = _context.Services.ToList();
+            return View(model);
         }
 
         // GET: Reservation/Delete/5
@@ -103,7 +116,6 @@ namespace servicesharing.Controllers
                 return NotFound();
             }
 
-            // Преобразуваме Reservation в ReservationViewModel
             var model = new ReservationViewModel
             {
                 ServiceId = reservation.ServiceId,
@@ -111,7 +123,7 @@ namespace servicesharing.Controllers
                 ReservationDate = reservation.ReservationDate
             };
 
-            return View(model);  // Подаваме ReservationViewModel на изгледа
+            return View(model);
         }
 
         // POST: Reservation/DeleteConfirmed/5
@@ -128,7 +140,7 @@ namespace servicesharing.Controllers
             _context.Reservations.Remove(reservation);
             _context.SaveChanges();
 
-            TempData["SuccessMessage"] = "Резервацията е успешно изтрита!";
+            TempData["SuccessMessage"] = "Reservation successfully deleted!";
             return RedirectToAction("Index");
         }
     }

@@ -1,29 +1,31 @@
-﻿@model List<servicesharing.ViewModels.ServiceViewModel>
-
-@{
-    ViewData["Title"] = "Списък с услуги";
+﻿@{
+    var services = new List<dynamic>
+    {
+        new { Id = 1, Name = "Ремонт на двигател", Description = "Подмяна на части и диагностика на двигателя.", Price = 150.00m, EstimatedTime = 120 },
+        new { Id = 2, Name = "Смяна на масло", Description = "Смяна на моторно масло и филтри.", Price = 40.00m, EstimatedTime = 30 },
+        new { Id = 3, Name = "Ремонт на трансмисия", Description = "Пълна диагностика и ремонт на трансмисия.", Price = 200.00m, EstimatedTime = 180 }
+    };
 }
 
 <h2>Списък с услуги</h2>
+
 <table class="table">
     <thead>
         <tr>
             <th>Име на услуга</th>
             <th>Описание</th>
             <th>Цена</th>
-            <th>Действия</th>
+            <th>Време за изпълнение</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var service in Model)
+        @foreach (var service in services)
         {
             <tr>
                 <td>@service.Name</td>
                 <td>@service.Description</td>
                 <td>@service.Price лв.</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@service.Id">Детайли</a>
-                </td>
+                <td>@service.EstimatedTime мин.</td>
             </tr>
         }
     </tbody>

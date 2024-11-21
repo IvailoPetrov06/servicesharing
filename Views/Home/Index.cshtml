@@ -1,45 +1,118 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    Layout = "_Layout"; // Задаваме шаблона за оформление
+    Layout = "_Layout"; // Set the layout template
 }
 
-<div class="jumbotron text-center">
-    <h1 class="display-4">Welcome to ServiceSharing</h1>
-    <p class="lead">Your one-stop solution for finding and reserving reliable services and expert mechanics.</p>
-    <hr class="my-4" />
-    <p>Get started by exploring our services or booking an appointment with a trusted professional.</p>
-    <a class="btn btn-primary btn-lg" asp-controller="Service" asp-action="List" role="button">Explore Services</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
 
-<div class="container mt-5">
-    <h2 class="mb-4">Our Top Services</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Professional Mechanics</h5>
-                    <p class="card-text">Get your vehicle inspected and serviced by our experienced mechanics.</p>
-                    <a class="btn btn-secondary" asp-controller="Mechanic" asp-action="List">Learn More</a>
+    <style>
+        /* Set background color for the body */
+        body {
+            background-color: #f4f7fc; /* Background color */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes up the full height of the viewport */
+        }
+
+        /* Footer styling */
+        .footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #34495e; /* Dark gray background for footer */
+            color: #ecf0f1; /* Light text color */
+            font-size: 0.9rem;
+            border-top: 1px solid #2c3e50; /* Darker border at the top */
+            margin-top: auto; /* Ensures footer is at the bottom of the page */
+        }
+
+            .footer p {
+                margin: 0;
+            }
+
+            .footer a {
+                color: #ecf0f1;
+                text-decoration: none;
+            }
+
+                .footer a:hover {
+                    text-decoration: underline;
+                }
+
+        /* Make the cards appear side by side */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem; /* Space between the cards */
+        }
+
+        /* Ensuring the cards are properly aligned */
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .col-md-4 {
+            flex: 1;
+            margin-bottom: 1rem; /* Add margin between rows */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Jumbotron Section -->
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Welcome to ServiceSharing</h1>
+        <p class="lead">Your one-stop solution for finding and reserving reliable services and expert mechanics.</p>
+        <hr class="my-4" />
+        <p>Get started by exploring our services or booking an appointment with a trusted professional.</p>
+        <a class="btn btn-primary btn-lg" asp-controller="Service" asp-action="List" role="button">Explore Services</a>
+    </div>
+
+    <!-- Services Section -->
+    <div class="container mt-5">
+        <h2 class="mb-4">Our Top Services</h2>
+        <div class="row">
+            <!-- Professional Mechanics -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Professional Mechanics</h5>
+                        <p class="card-text">Get your vehicle inspected and serviced by our experienced mechanics.</p>
+                        <a class="btn btn-secondary" asp-controller="Mechanic" asp-action="List">Learn More</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Reservation</h5> <!-- Заглавие на секцията -->
-                    <p class="card-text"></p> <!-- Описанието е премахнато -->
-                    <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Create">Book Now</a> <!-- Асп контролер и действие за резервация -->
+
+            <!-- Reservation -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Reservation</h5>
+                        <p class="card-text">Book an appointment with our expert mechanics for your vehicle.</p>
+                        <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Create">Book Now</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Privacy and Trust</h5>
-                    <p class="card-text">Learn more about how we protect your data and provide a secure environment.</p>
-                    <a class="btn btn-secondary" asp-controller="Home" asp-action="Privacy">Read More</a>
+
+            <!-- Privacy and Trust -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Privacy and Trust</h5>
+                        <p class="card-text">Learn more about how we protect your data and provide a secure environment.</p>
+                        <a class="btn btn-secondary" asp-controller="Home" asp-action="Privacy">Read More</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+</body>
+</html>

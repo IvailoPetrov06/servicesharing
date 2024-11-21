@@ -11,5 +11,6 @@ namespace servicesharing.ViewModels
         public double Rating { get; set; }
         public List<ServiceViewModel> Services { get; set; }
         public List<ReviewViewModel> Reviews { get; set; }
+        public string Email { get; set; }
     }
 }

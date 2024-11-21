@@ -8,26 +8,19 @@ namespace servicesharing.Controllers
     {
         public IActionResult Profile(int id)
         {
-            // Примерно извличане на данни за механика
             var mechanic = new MechanicProfileViewModel
             {
-                Id = id,
-                Name = "Примерен механик",
-             
+                Id = 1,
+                Name = "Иван Георгиев"
             };
 
-            return View(mechanic);
+            // Предаване на един механик в изгледа
+            return View(new List<MechanicProfileViewModel> { mechanic });
         }
 
         public IActionResult List()
         {
-            var mechanics = new List<MechanicProfileViewModel>
-            {
-                new MechanicProfileViewModel { Id = 1, Name = "Механик 1" },
-                new MechanicProfileViewModel { Id = 2, Name = "Механик 2" },
-            };
-
-            return View(mechanics);
+            return View();
         }
     }
 }
