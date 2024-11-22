@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using servicesharing.Models;
+using servicesharing.Data.Entities;
 
 namespace servicesharing.Data
 {
-    public class AppDbContext : IdentityDbContext<Users>
+    public class AppDbContext : IdentityDbContext<User>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions options) : base(options)
         {
         }
 
@@ -16,7 +16,6 @@ namespace servicesharing.Data
         public DbSet<Service> Services { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,7 +26,6 @@ namespace servicesharing.Data
             modelBuilder.Entity<Service>().ToTable("Services");
             modelBuilder.Entity<Reservation>().ToTable("Reservations");
             modelBuilder.Entity<Review>().ToTable("Reviews");
-            modelBuilder.Entity<Profile>().ToTable("Profiles");
         }
     }
 }

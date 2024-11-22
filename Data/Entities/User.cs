@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace servicesharing.Models
+namespace servicesharing.Data.Entities
 {
-    public class Users : IdentityUser
+    public class User : IdentityUser
     {
         public string FullName { get; set; }
     }

@@ -1,19 +1,18 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using servicesharing.Models;
 using servicesharing.ViewModels;
-using servicesharing.Models;
 using servicesharing.ViewModels;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using servicesharing.Data.Entities;
 
 namespace UsersApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<Users> signInManager;
-        private readonly UserManager<Users> userManager;
+        private readonly SignInManager<User> signInManager;
+        private readonly UserManager<User> userManager;
 
-        public AccountController(SignInManager<Users> signInManager, UserManager<Users> userManager)
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
@@ -54,7 +53,7 @@ namespace UsersApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                Users users = new Users
+                User users = new User
                 {
                     FullName = model.Name,
                     Email = model.Email,

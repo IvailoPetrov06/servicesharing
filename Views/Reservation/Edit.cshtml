@@ -23,10 +23,10 @@
 <form method="post">
     <div class="form-group">
         <!-- Проверка дали има услуги за показване в падащото меню -->
-        @if (ViewData["Services"] != null && ((List<servicesharing.Models.Service>)ViewData["Services"]).Any())
+        @if (Model.Services != null)
         {
             <label for="ServiceId">Услуга</label>
-            <select asp-for="ServiceId" class="form-control" asp-items="@(new SelectList(ViewData["Services"] as List<servicesharing.Models.Service>, "Id", "Name", Model.ServiceId))">
+            <select asp-for="ServiceId" class="form-control" asp-items="@(new SelectList(Model.Services as List<Service>, "Id", "Name", Model.ServiceId))">
             </select>
         }
         else
@@ -59,7 +59,7 @@
 <!-- Показване на избраната услуга (заедно с нейното име) -->
 @if (Model.ServiceId != null && ViewData["Services"] != null)
 {
-    var selectedService = ((List<servicesharing.Models.Service>)ViewData["Services"]).FirstOrDefault(s => s.Id == Model.ServiceId);
+    var selectedService = ((List<Service>)ViewData["Services"]).FirstOrDefault(s => s.Id == Model.ServiceId);
     if (selectedService != null)
     {
         <div class="mt-3">

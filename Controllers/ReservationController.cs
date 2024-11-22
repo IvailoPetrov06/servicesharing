@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using servicesharing.Data;
-using servicesharing.Models;
 using servicesharing.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using servicesharing.Data.Entities;
 
 namespace servicesharing.Controllers
 {
@@ -61,7 +61,8 @@ namespace servicesharing.Controllers
             {
                 ServiceId = reservation.ServiceId,
                 CustomerEmail = reservation.CustomerEmail,
-                ReservationDate = reservation.ReservationDate
+                ReservationDate = reservation.ReservationDate,
+                Services = _context.Services.ToList()
             };
 
             // Зареждаме всички услуги от базата данни и ги подаваме към ViewData

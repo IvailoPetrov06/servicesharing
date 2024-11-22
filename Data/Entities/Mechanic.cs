@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace servicesharing.Models
+namespace servicesharing.Data.Entities
 {
     public class Mechanic
     {

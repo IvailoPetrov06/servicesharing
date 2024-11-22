@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using servicesharing.Models;
+using servicesharing.Data.Entities;
 using servicesharing.ViewModels;
 
 namespace servicesharing.Controllers
@@ -15,7 +15,7 @@ namespace servicesharing.Controllers
         public IActionResult ManageUsers()
         {
             // Логика за управление на потребители
-            return View(new List<Users>());
+            return View(new List<User>());
         }
     }
 }

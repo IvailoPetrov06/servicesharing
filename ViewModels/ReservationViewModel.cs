@@ -1,4 +1,5 @@
-﻿using System;
+﻿using servicesharing.Data.Entities;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace servicesharing.ViewModels
@@ -14,6 +15,8 @@ namespace servicesharing.ViewModels
 
         [Required(ErrorMessage = "Дата и час на резервация е задължителна.")]
         public DateTime ReservationDate { get; set; }
+
+        public List<Service> Services { get; set; }
 
     }
 }
