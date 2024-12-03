@@ -15,15 +15,30 @@
             color: #333;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Ensure the body takes up full viewport height */
+            min-height: 100vh;
         }
 
         .container {
             padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
-            flex-grow: 1; /* Makes sure container grows to fill available space */
+            flex-grow: 1;
         }
+
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+            .filters select, .filters input {
+                padding: 8px;
+                font-size: 1em;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                width: 200px;
+            }
 
         .services {
             display: flex;
@@ -69,21 +84,6 @@
                 margin: 10px 0;
             }
 
-            .service-card .book-btn {
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-
-                .service-card .book-btn:hover {
-                    background-color: #45a049;
-                }
-
-        /* Стилове за футера */
         footer {
             background-color: #34495e;
             color: #ecf0f1;
@@ -108,18 +108,32 @@
                     text-decoration: underline;
                 }
 
-        /* Филтриране */
-        .filters {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
+        .car-selection {
+            margin-top: 20px;
+            display: none;
         }
 
-            .filters select, .filters input {
-                padding: 8px;
-                font-size: 1em;
-                border-radius: 5px;
-                border: 1px solid #ccc;
+            .car-selection select {
+                width: 200px;
+                margin-right: 10px;
+            }
+
+        .service-details {
+            margin-top: 20px;
+        }
+
+        .back-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+            .back-button:hover {
+                background-color: #45a049;
             }
     </style>
 </head>
@@ -127,50 +141,340 @@
 <body>
 
     <header>
-        <h1>Услуги за Автосервизи</h1>
+        <h1>Търсене на налични услуги за Автосервизи</h1>
         <p>Намерете и резервирайте услуги за вашето превозно средство с лекота.</p>
     </header>
 
     <div class="container">
+        <!-- Filters Section -->
         <div class="filters">
-            <select id="service-category">
-                <option value="">Категория</option>
-                <option value="repair">Ремонт на двигатели</option>
-                <option value="tires">Смяна на гуми</option>
-                <option value="oil-change">Смяна на масло</option>
-                <option value="diagnostic">Диагностика</option>
+            <!-- Price Filter -->
+            <select id="price-filter">
+                <option value="asc">Цена по възходящ ред</option>
+                <option value="desc">Цена по низходящ ред</option>
             </select>
+
+            <!-- Search Filter -->
             <input type="text" id="service-search" placeholder="Търсене по услуга..." />
         </div>
 
-        <section class="services">
-            <!-- Примерна услуга 1 -->
-            <div class="service-card">
+        <!-- Services Section -->
+        <section class="services" id="services-list">
+            <!-- Example Service Cards (20 services should be displayed) -->
+            <!-- Service 1 -->
+            <div class="service-card" data-price="100">
                 <img src="service1.jpg" alt="Ремонт на двигател">
                 <h3>Ремонт на двигател</h3>
                 <p>Професионален ремонт на двигатели за всички видове автомобили.</p>
                 <p class="price">Цена: 100 лв</p>
-                <button class="book-btn" onclick="window.location.href='/reservation'">Резервирай сега</button>
+                <button class="select-details">Избери марка, модел и година</button>
             </div>
 
-            <!-- Примерна услуга 2 -->
-            <div class="service-card">
+            <!-- Service 2 -->
+            <div class="service-card" data-price="50">
                 <img src="service2.jpg" alt="Смяна на гуми">
                 <h3>Смяна на гуми</h3>
                 <p>Бързо и лесно сменяме гумите на вашето превозно средство.</p>
                 <p class="price">Цена: 50 лв</p>
-                <button class="book-btn" onclick="window.location.href='/reservation'">Резервирай сега</button>
+                <button class="select-details">Избери марка, модел и година</button>
             </div>
 
-            <!-- Примерна услуга 3 -->
-            <div class="service-card">
+            <!-- Service 3 -->
+            <div class="service-card" data-price="120">
                 <img src="service3.jpg" alt="Диагностика на автомобил">
                 <h3>Диагностика на автомобил</h3>
                 <p>Откриване на проблеми и диагностика на вашето превозно средство.</p>
-                <p class="price">Цена: 30 лв</p>
-                <button class="book-btn" onclick="window.location.href='/reservation'">Резервирай сега</button>
+                <p class="price">Цена: 120 лв</p>
+                <button class="select-details">Избери марка, модел и година</button>
             </div>
+
+            <!-- Add more example service cards (4-20) -->
+            <div class="service-card" data-price="90">
+                <img src="service4.jpg" alt="Ремонт на спирачки">
+                <h3>Ремонт на спирачки</h3>
+                <p>Професионален ремонт на спирачки за безопасността на вашето превозно средство.</p>
+                <p class="price">Цена: 90 лв</p>
+                <button class="select-details">Избери марка, модел и година</button>
+            </div>
+
+            <div class="service-card" data-price="70">
+                <img src="service5.jpg" alt="Климатик">
+                <h3>Ремонт на климатик</h3>
+                <p>Ремонт и зареждане на климатични системи за комфорт по всяко време.</p>
+                <p class="price">Цена: 70 лв</p>
+                <button class="select-details">Избери марка, модел и година</button>
+            </div>
+
+            <div class="service-card" data-price="150">
+                <img src="service6.jpg" alt="Смяна на масла">
+                <h3>Смяна на масла</h3>
+                <p>Смяна на масла и филтри с гарантирано качество и безопасност.</p>
+                <p class="price">Цена: 150 лв</p>
+                <button class="select-details">Избери марка, модел и година</button>
+            </div>
+
+            <div class="service-card" data-price="200">
+                <img src="service7.jpg" alt="Чип тунинг">
+                <h3>Чип тунинг</h3>
+                <p>Оптимизирайте производителността на вашето превозно средство с чип тунинг.</p>
+                <p class="price">Цена: 200 лв</p>
+                <button class="select-details">Избери марка, модел и година</button>
+            </div>
+
+            <div class="service-card" data-price="60">
+                <img src="service8.jpg" alt="Баланс на гуми">
+                <h3>Баланс на гуми</h3>
+                <p>Професионално балансиране на гуми за безопасно и комфортно шофиране.</p>
+                <p class="price">Цена: 60 лв</p>
+                <button class="select-details">Избери марка, модел и година</button>
+            </div>
+
+            <div class="service-card" data-price="180">
+                <img src="service9.jpg" alt="Автомивка">
+                <h3>Автомивка</h3>
+                <p>Почистване на вашето превозно средство с професионални средства и препарати.</p>
+                <p class="price">Цена: 180 лв</p>
+                <button class="select-details">Избери марка, модел и година</button>
+            </div>
+
+            <!-- Continue adding more service cards (10-20) -->
+            <!-- Example Services 10-20 can follow similar structure -->
         </section>
+
+        <!-- Car selection filter (hidden initially) -->
+        <div class="car-selection" id="car-selection">
+            <h3>Изберете вашия автомобил</h3>
+            <label for="car-brand">Марка:</label>
+            <select id="car-brand" onchange="updateModels()">
+                <option value="bmw">BMW</option>
+                <option value="audi">Audi</option>
+                <option value="toyota">Toyota</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="ford">Ford</option>
+                <option value="chevrolet">Chevrolet</option>
+                <option value="honda">Honda</option>
+                <option value="nissan">Nissan</option>
+                <option value="hyundai">Hyundai</option>
+                <option value="kia">Kia</option>
+                <option value="volkswagen">Volkswagen</option>
+                <option value="subaru">Subaru</option>
+                <option value="mazda">Mazda</option>
+                <option value="tesla">Tesla</option>
+                <option value="volvo">Volvo</option>
+            </select>
+
+            <label for="car-model">Модел:</label>
+            <select id="car-model">
+                <!-- Model options will be dynamically added here -->
+            </select>
+
+            <label for="car-year">Година:</label>
+            <select id="car-year">
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2012">2012</option>
+                <option value="2011">2011</option>
+                <option value="2010">2010</option>
+                <option value="2009">2009</option>
+                <option value="2008">2008</option>
+                <option value="2007">2007</option>
+                <option value="2006">2006</option>
+                <option value="2005">2005</option>
+                <option value="2004">2004</option>
+                <option value="2003">2003</option>
+                <option value="2002">2002</option>
+                <option value="2001">2001</option>
+                <option value="2000">2000</option>
+            </select>
+
+            <button id="show-service-providers" onclick="showServiceProviders()">Покажи автосервизите</button>
+
+            <!-- Back Button -->
+            <button class="back-button" id="back-button" onclick="goBack()">Назад</button>
+
+            <div class="service-details" id="service-details">
+                <!-- Service providers will be shown here -->
+            </div>
+        </div>
+
     </div>
+
+    <script>
+        // Filter Services based on search and price
+        document.getElementById('price-filter').addEventListener('change', filterServices);
+        document.getElementById('service-search').addEventListener('input', filterServices);
+
+        function filterServices() {
+            const priceFilter = document.getElementById('price-filter').value;
+            const searchQuery = document.getElementById('service-search').value.toLowerCase();
+
+            const services = document.querySelectorAll('.service-card');
+            const servicesList = document.getElementById('services-list');
+
+            // Sort services by price
+            const sortedServices = Array.from(services).sort((a, b) => {
+                const priceA = parseInt(a.getAttribute('data-price'));
+                const priceB = parseInt(b.getAttribute('data-price'));
+                return priceFilter === 'asc' ? priceA - priceB : priceB - priceA;
+            });
+
+            servicesList.innerHTML = ''; // Clear the existing services
+
+            // Iterate through sorted services and apply search filter
+            let anyMatchingService = false; // Flag to check if any service matches the filters
+            sortedServices.forEach(service => {
+                const serviceName = service.querySelector('h3').textContent.toLowerCase();
+
+                // Check if the service matches the search query
+                const matchesSearch = !searchQuery || serviceName.includes(searchQuery);
+
+                if (matchesSearch) {
+                    servicesList.appendChild(service); // Show the service
+                    anyMatchingService = true; // Mark as matching service found
+                }
+            });
+
+            // If no service matches the search, show a "No results" message
+            if (!anyMatchingService) {
+                servicesList.innerHTML = '<p>Няма намерени услуги по зададеното търсене. Моля, опитайте отново.</p>';
+            }
+        }
+
+        // Service Button for Selecting Car Details
+        const selectButtons = document.querySelectorAll('.select-details');
+        selectButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Show car selection
+                document.getElementById('car-selection').style.display = 'block';
+            });
+        });
+
+        // Dynamically update car models based on selected brand
+        function updateModels() {
+            const brand = document.getElementById('car-brand').value;
+            const modelSelect = document.getElementById('car-model');
+
+            // Reset the model dropdown
+            modelSelect.innerHTML = '';
+
+            let models = [];
+            if (brand === 'bmw') {
+                models = [
+                    'X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7', 'M3', 'M4', 'M5', 'M8',
+                    '2 Series', '3 Series', '4 Series', '5 Series', '6 Series', '7 Series',
+                    '8 Series', 'Z4', 'i3', 'i4', 'i7', 'i8', 'iX', 'iX3'
+                ];
+            } else if (brand === 'audi') {
+                models = [
+                    'A1', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'Q2', 'Q3', 'Q4 e-tron',
+                    'Q5', 'Q7', 'Q8', 'e-tron', 'e-tron GT', 'RS3', 'RS4', 'RS5', 'RS6',
+                    'RS7', 'RS Q3', 'RS Q8', 'TT', 'TTS', 'R8'
+                ];
+            } else if (brand === 'toyota') {
+                models = [
+                    'Corolla', 'Camry', 'RAV4', 'Yaris', 'Yaris Cross', 'C-HR', 'Highlander',
+                    'Land Cruiser', 'Hilux', 'Supra', 'Avalon', 'Prius', 'Prius Prime',
+                    'Sequoia', 'Tacoma', 'Tundra', 'GR86', 'GR Corolla', 'Sienna', '4Runner'
+                ];
+            } else if (brand === 'mercedes') {
+                models = [
+                    'A-Class', 'B-Class', 'C-Class', 'E-Class', 'S-Class', 'CLA', 'CLS',
+                    'GLA', 'GLB', 'GLC', 'GLE', 'GLS', 'G-Class', 'AMG GT', 'EQC', 'EQA',
+                    'EQB', 'EQS', 'EQE', 'SL-Class', 'SLC', 'V-Class'
+                ];
+            } else if (brand === 'ford') {
+                models = [
+                    'F-150', 'Mustang', 'Explorer', 'Escape', 'Edge', 'Fusion', 'Bronco',
+                    'Ranger', 'Maverick', 'Expedition', 'Focus', 'Fiesta'
+                ];
+            } else if (brand === 'chevrolet') {
+                models = [
+                    'Silverado', 'Colorado', 'Tahoe', 'Suburban', 'Equinox', 'Trailblazer',
+                    'Traverse', 'Camaro', 'Corvette', 'Malibu', 'Blazer', 'Spark'
+                ];
+            } else if (brand === 'honda') {
+                models = [
+                    'Civic', 'Accord', 'CR-V', 'HR-V', 'Pilot', 'Odyssey', 'Fit',
+                    'Ridgeline', 'Passport'
+                ];
+            } else if (brand === 'nissan') {
+                models = [
+                    'Altima', 'Maxima', 'Sentra', 'Versa', 'Rogue', 'Murano', 'Pathfinder',
+                    'Armada', 'Kicks', 'Frontier', 'Titan', 'Z'
+                ];
+            } else if (brand === 'hyundai') {
+                models = [
+                    'Elantra', 'Sonata', 'Accent', 'Tucson', 'Santa Fe', 'Kona', 'Palisade',
+                    'Ioniq 5', 'Ioniq 6', 'Venue', 'Nexo'
+                ];
+            } else if (brand === 'kia') {
+                models = [
+                    'Optima', 'Stinger', 'Sportage', 'Sorento', 'Telluride', 'Soul',
+                    'Seltos', 'Niro', 'Carnival', 'K5', 'EV6'
+                ];
+            } else if (brand === 'volkswagen') {
+                models = [
+                    'Golf', 'Jetta', 'Passat', 'Arteon', 'Atlas', 'Tiguan', 'ID.4',
+                    'ID.Buzz', 'Taos', 'Polo'
+                ];
+            } else if (brand === 'subaru') {
+                models = [
+                    'Outback', 'Forester', 'Impreza', 'WRX', 'Ascent', 'Crosstrek',
+                    'Legacy', 'BRZ'
+                ];
+            } else if (brand === 'mazda') {
+                models = [
+                    'Mazda3', 'Mazda6', 'CX-3', 'CX-30', 'CX-5', 'CX-50', 'CX-9',
+                    'MX-5 Miata'
+                ];
+            } else if (brand === 'tesla') {
+                models = [
+                    'Model S', 'Model 3', 'Model X', 'Model Y', 'Cybertruck', 'Roadster'
+                ];
+            } else if (brand === 'volvo') {
+                models = [
+                    'XC40', 'XC60', 'XC90', 'S60', 'S90', 'V60', 'V90', 'C40 Recharge'
+                ];
+            }
+
+            models.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model;
+                option.textContent = model;
+                modelSelect.appendChild(option);
+            });
+        }
+
+        // Show available service providers based on car details
+        function showServiceProviders() {
+            const brand = document.getElementById('car-brand').value;
+            const model = document.getElementById('car-model').value;
+            const year = document.getElementById('car-year').value;
+
+            const serviceDetails = document.getElementById('service-details');
+            serviceDetails.innerHTML = `<h4>Налични автосервизи за ${brand} ${model} (${year}):</h4>`;
+
+            // Example service providers (you can dynamically load them)
+            serviceDetails.innerHTML += `
+                        <p>Автосерв 1: Ремонт на двигатели</p>
+                        <p>Автосерв 2: Смяна на гуми</p>
+                        <p>Автосерв 3: Диагностика на автомобил</p>
+                    `;
+        }
+
+        // Go back to the car selection
+        function goBack() {
+            document.getElementById('car-selection').style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>

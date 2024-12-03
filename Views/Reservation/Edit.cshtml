@@ -20,19 +20,20 @@
     </div>
 }
 
-<form method="post">
-    <div class="form-group">
-        <!-- Проверка дали има услуги за показване в падащото меню -->
-        @if (Model.Services != null)
-        {
-            <label for="ServiceId">Услуга</label>
-            <select asp-for="ServiceId" class="form-control" asp-items="@(new SelectList(Model.Services as List<Service>, "Id", "Name", Model.ServiceId))">
-            </select>
-        }
-        else
-        {
-            <p>Няма налични услуги.</p>
-        }
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <!-- Услуга -->
+    <div class="mb-3">
+        <label asp-for="ServiceId" class="form-label">Услуга</label>
+        <select asp-for="ServiceId" class="form-select">
+            <option value="">Изберете услуга</option>
+            <option value="1">Ремонт на двигател</option>
+            <option value="2">Смяна на масло</option>
+            <option value="3">Диагностика на автомобил</option>
+            <option value="4">Ремонт на спирачки</option>
+            <option value="5">Смяна на гуми</option>
+        </select>
         <span asp-validation-for="ServiceId" class="text-danger"></span>
     </div>
 

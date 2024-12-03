@@ -12,7 +12,7 @@
             background-color: #f4f7fc;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Ensure the body takes up full viewport height */
+            min-height: 100vh;
         }
 
         h1 {
@@ -21,7 +21,7 @@
         }
 
         .content {
-            flex-grow: 1; /* Makes sure content area grows to fill available space */
+            flex-grow: 1; /* Разтяга съдържанието, за да заема наличното пространство */
             margin-top: 20px;
             background-color: white;
             padding: 20px;
@@ -65,22 +65,22 @@
             font-size: 1.2em;
         }
 
-        /* Стилове за футера */
+        /* Фиксиране на футера в дъното */
         footer {
             background-color: #34495e;
             color: #ecf0f1;
             text-align: center;
             padding: 15px 0;
-            font-size: 1rem; /* Настройка на размера на шрифта */
+            font-size: 1rem;
             border-top: 1px solid #2c3e50;
             width: 100%;
-            position: relative;
+            position: sticky;
             bottom: 0;
         }
 
             footer p {
                 margin: 0;
-                font-size: 1rem; /* За да е същия размер като в примера */
+                font-size: 1rem;
             }
 
             footer a {
@@ -94,7 +94,6 @@
     </style>
 </head>
 <body>
-
     <h1>Свържете се с механика</h1>
 
     <div class="content">
@@ -105,7 +104,7 @@
                 <!-- Падащо меню за избиране на механик -->
                 <label for="mechanic">Изберете механика:</label>
                 <select id="mechanic" name="mechanic" required>
-                    <option value="john_doe">John Doe</option>
+                    <option value="gosho_ivanov">Георги Иванов</option>
                     <option value="ivan_petrov">Иван Петров</option>
                 </select>
 
@@ -124,6 +123,7 @@
 
         <div id="responseMessage" class="response-message"></div>
     </div>
+
     <script>
         // JavaScript за обработка на формата
         document.getElementById('contactForm').addEventListener('submit', function (event) {
@@ -146,6 +146,5 @@
             window.location.href = mailtoLink;
         });
     </script>
-
 </body>
 </html>

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Резервация - ServiceSharing</title>
+    <title>Автосервизи - ServiceSharing</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         /* Общи стилове */
         body {
@@ -20,38 +21,6 @@
             margin: 0 auto;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-            .form-group label {
-                display: block;
-                font-size: 1.2em;
-                margin-bottom: 8px;
-            }
-
-            .form-group input, .form-group select, .form-group textarea {
-                width: 100%;
-                padding: 10px;
-                font-size: 1em;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-            }
-
-            .form-group button {
-                padding: 10px 20px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                font-size: 1.2em;
-                cursor: pointer;
-            }
-
-                .form-group button:hover {
-                    background-color: #45a049;
-                }
-
         .service-info {
             background-color: #f1f1f1;
             padding: 15px;
@@ -59,17 +28,12 @@
             border-radius: 8px;
         }
 
-            .service-info h3 {
-                margin-top: 0;
-                font-size: 1.8em;
-                color: #333;
-            }
+        .map-container {
+            width: 100%;
+            height: 500px;
+            margin-bottom: 20px;
+        }
 
-            .service-info p {
-                color: #555;
-            }
-
-        /* Footer */
         footer {
             background-color: #34495e;
             color: #ecf0f1;
@@ -94,83 +58,65 @@
                 footer a:hover {
                     text-decoration: underline;
                 }
-
     </style>
 </head>
+
 <body>
 
     <header>
-        <h1>Резервация на услуга</h1>
-        <p>Изберете услуга, време и попълнете данни за резервация.</p>
+        <h1>Нашите автосервизи</h1>
+        <p>Търсете и вижте нашите автосервизи в Бургас и София.</p>
     </header>
 
     <div class="container">
+        <!-- OpenStreetMap карта -->
+        <div class="map-container" id="map"></div>
 
-        <!-- Резервационната форма -->
-        <form id="reservationForm">
-            <div class="form-group">
-                <label for="customerName">Вашето име</label>
-                <input type="text" id="customerName" name="customerName" required>
-            </div>
-            <div class="form-group">
-                <label for="customerEmail">Електронна поща</label>
-                <input type="email" id="customerEmail" name="customerEmail" required>
-            </div>
-            <div class="form-group">
-                <label for="reservationDate">Дата и час</label>
-                <input type="datetime-local" id="reservationDate" name="reservationDate" required>
-            </div>
-            <div class="form-group">
-                <label for="service">Изберете услуга</label>
-                <select id="service" name="service" required>
-                    <option value="engine-repair">Ремонт на двигател</option>
-                    <option value="oil-change">Смяна на масло</option>
-                    <option value="tire-change">Смяна на гуми</option>
-                    <option value="diagnostic">Диагностика</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="specialRequest">Специални изисквания</label>
-                <textarea id="specialRequest" name="specialRequest" rows="4" placeholder="Добавете бележки или специални изисквания тук..."></textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit">Резервирай сега</button>
-            </div>
-        </form>
+        <!-- Информация за автосервизи -->
+        <div class="service-info">
+            <h3>Автосервиз Мотор-Мастер</h3>
+            <p>Местоположение: Бургас, ул. Примерна 12</p>
+        </div>
 
-        <!-- Потвърждение на резервацията -->
-        <div class="confirmation" id="confirmationMessage" style="display: none;">
-            <h3>Вашата резервация</h3>
-            <p><strong>Име:</strong> <span id="confirmName"></span></p>
-            <p><strong>Услуга:</strong> <span id="confirmService"></span></p>
-            <p><strong>Дата и час:</strong> <span id="confirmDate"></span></p>
-            <p><strong>Специални изисквания:</strong> <span id="confirmRequest"></span></p>
-            <p>Резервацията ви беше успешно приета. Очаквайте потвърждение.</p>
+        <!-- Добавяне на още измислени автосервизи -->
+        <div class="service-info">
+            <h3>Автосервиз ДрайвТех</h3>
+            <p>Местоположение: Бургас, ул. Гоце Делчев 7</p>
+        </div>
+
+        <div class="service-info">
+            <h3>Ремонтни услуги Бургас</h3>
+            <p>Местоположение: Бургас, ул. Морска 9</p>
+        </div>
+
+        <div class="service-info">
+            <h3>Автосервиз Октавио</h3>
+            <p>Местоположение: София, ул. Транспортна 3</p>
         </div>
     </div>
 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        // JavaScript за обработка на формата
-        document.getElementById('reservationForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Прекратяваме стандартното изпращане на формата
+        // Инициализация на OpenStreetMap с Leaflet
+        var map = L.map('map').setView([42.5038, 27.4626], 13); // Координатите за Бургас
 
-            // Вземаме стойностите от формата
-            var name = document.getElementById('customerName').value;
-            var email = document.getElementById('customerEmail').value;
-            var date = document.getElementById('reservationDate').value;
-            var service = document.getElementById('service').value;
-            var request = document.getElementById('specialRequest').value;
+        // Добавяне на OpenStreetMap слой
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
-            // Показваме потвърждението с данните
-            document.getElementById('confirmName').textContent = name;
-            document.getElementById('confirmService').textContent = service;
-            document.getElementById('confirmDate').textContent = date;
-            document.getElementById('confirmRequest').textContent = request || 'Няма специални изисквания';
+        // Добавяне на маркери за автосервизите
+        var marker1 = L.marker([42.5038, 27.4626]).addTo(map); // Примерни координати на автосервиза в Бургас
+        marker1.bindPopup("<b>Автосервиз Мотор-Мастер</b><br>Бургас, ул. Примерна 12").openPopup();
 
-            // Скриваме формата и показваме потвърждението
-            document.getElementById('reservationForm').style.display = 'none';
-            document.getElementById('confirmationMessage').style.display = 'block';
-        });
+        var marker2 = L.marker([42.5050, 27.4660]).addTo(map); // Примерни координати на автосервиза в Бургас
+        marker2.bindPopup("<b>Автосервиз ДрайвТех</b><br>Бургас, ул. Гоце Делчев 7");
+
+        var marker3 = L.marker([42.5120, 27.4730]).addTo(map); // Примерни координати на автосервиза в Бургас
+        marker3.bindPopup("<b>Ремонтни услуги Бургас</b><br>Бургас, ул. Морска 9");
+
+        var marker4 = L.marker([42.6977, 23.3219]).addTo(map); // Примерни координати на автосервиза в София
+        marker4.bindPopup("<b>Автосервиз Октавио</b><br>София, ул. Транспортна 3");
     </script>
 
 </body>
