@@ -78,6 +78,25 @@ namespace UsersApp.Controllers
             }
             return View(model);
         }
+        public async Task<IActionResult> Profile()
+        {
+            // Извличане на информация за текущия потребител
+            var user = await userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");  // Ако потребителят не е намерен, го пренасочваме към Login
+            }
+
+            // Създаване на модел с информация за потребителя
+            var model = new ProfileViewModel
+            {
+                FullName = user.FullName,
+                Email = user.Email
+            };
+
+            return View(model); // Връщаме изгледа с информация за потребителя
+        }
 
         public IActionResult VerifyEmail()
         {
@@ -104,6 +123,7 @@ namespace UsersApp.Controllers
             return View(model);
         }
 
+
         public IActionResult ChangePassword(string username)
         {
             if (string.IsNullOrEmpty(username))
@@ -112,6 +132,7 @@ namespace UsersApp.Controllers
             }
             return View(new ChangePasswordViewModel { Email = username });
         }
+
 
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)

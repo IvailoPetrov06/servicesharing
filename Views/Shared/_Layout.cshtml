@@ -52,7 +52,7 @@
                                 <a class="nav-link text-dark" asp-controller="Home" asp-action="Service">Обслужване</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Reservation">Автосервизи</a>
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Reservation">втосервизи</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Поверителност</a>
@@ -61,11 +61,14 @@
                         <ul class="navbar-nav ml-auto">
                             @if (User.Identity.IsAuthenticated)
                             {
+
                                 <li class="nav-item">
-                                    <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
-                                        <button type="submit" class="nav-link btn btn-link" style="padding: 0;">Излизане</button>
-                                    </form>
+                                  <a class="nav-link" asp-controller="Account" asp-action="Logout">Излизане</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Account" asp-action="Profile">Профил</a>
+                                </li>
+
                             }
                             else
                             {
