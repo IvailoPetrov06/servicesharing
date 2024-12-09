@@ -1,43 +1,86 @@
-﻿﻿@using servicesharing.ViewModels;
+﻿@using servicesharing.ViewModels;
 @model LoginViewModel;
 
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Вход";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
+<!-- Вграждане на CSS стилове директно в Login.cshtml -->
+<style>
+    .btn-show-password {
+        padding: 5px 10px;
+        font-size: 12px;
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+        .btn-show-password i {
+            margin-right: 5px;
+        }
+
+        .btn-show-password:hover {
+            background-color: #e2e2e2;
+        }
+
+    .input-group-append {
+        display: flex;
+    }
+</style>
+
 <div class="account-container">
     <div class="account-box">
-        <h2 class="text-center mb-4">Login</h2>
+        <h2 class="text-center mb-4">Вход</h2>
         <form asp-action="Login" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Имейл -->
             <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
+                <label asp-for="Email" class="form-label">Имейл</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+
+            <!-- Парола -->
             <div class="mb-3">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <label asp-for="Password" class="form-label">Парола</label>
+                <div class="input-group">
+                    <input asp-for="Password" class="form-control" id="passwordField" type="password" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-show-password" onclick="togglePassword('passwordField', 'eyeIconPassword')">
+                            <i id="eyeIconPassword" class="fa fa-eye"></i> Покажи парола
+                        </button>
+                    </div>
+                </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+
+            <!-- Забравена парола -->
             <div class="float-end">
                 <a asp-controller="Account" asp-action="VerifyEmail" class="text-decoration-none">
-                    Forgot password?
+                    Забравена парола?
                 </a>
             </div>
+
+            <!-- Запомни ме -->
             <div class="form-check mb-3">
                 <label class="form-check-label">
                     <input asp-for="RememberMe" class="form-check-input" />
                     @Html.DisplayNameFor(a=> a.RememberMe)
                 </label>
             </div>
-            <input type="submit" value="Login" class="btn btn-success w-100 p-2" />
+
+            <!-- Бутон за вход -->
+            <input type="submit" value="Вход" class="btn btn-success w-100 p-2" />
             <p class="text-center mt-2">
-                Don't have an account? <a asp-controller="Account" asp-action="Register" class="text-decoration-none">Register</a>
+                Нямате акаунт? <a asp-controller="Account" asp-action="Register" class="text-decoration-none">Регистрация</a>
             </p>
             <div class="text-center">
-                <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3">Back</a>
+                <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3">Назад</a>
             </div>
         </form>
     </div>
@@ -47,4 +90,22 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
     }
+
+    <script>
+        // Функция за показване/скриване на паролата
+        function togglePassword(fieldId, iconId) {
+            var passwordField = document.getElementById(fieldId);
+            var eyeIcon = document.getElementById(iconId);
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        }
+    </script>
 }

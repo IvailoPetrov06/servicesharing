@@ -4,7 +4,7 @@ namespace servicesharing.ViewModels
 {
     public class VerifyEmailViewModel
     {
-        [Required(ErrorMessage = "Email is required.")]
+        [Required(ErrorMessage = "Изисква се имейл.")]
         [EmailAddress]
         public string Email { get; set; }
     }

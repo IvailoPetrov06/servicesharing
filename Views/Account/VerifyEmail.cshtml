@@ -1,24 +1,27 @@
-﻿﻿@using servicesharing.ViewModels;
+﻿@using servicesharing.ViewModels;
 @model VerifyEmailViewModel;
 
 @{
-    ViewData["Title"] = "Verify Email";
+    ViewData["Title"] = "Потвърждаване на имейл";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
 <div class="account-container">
     <div class="account-box">
-        <h2 class="text-center mb-4">Verify Email</h2>
+        <h2 class="text-center mb-4">Потвърдете имейл</h2>
         <form asp-action="VerifyEmail" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Имейл -->
             <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
+                <label asp-for="Email" class="form-label">Имейл</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <input type="submit" value="Verify" class="btn btn-success w-100 p-2" />
+
+            <input type="submit" value="Потвърдете" class="btn btn-success w-100 p-2" />
             <div class="text-center mt-2">
-                <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3">Back</a>
+                <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3">Назад</a>
             </div>
         </form>
     </div>

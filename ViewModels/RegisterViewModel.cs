@@ -4,22 +4,25 @@ namespace servicesharing.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Name is required.")]
+        [Required(ErrorMessage = "Името е задължително.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress]
+        [Required(ErrorMessage = "Имейл е задължителен.")]
+        [EmailAddress(ErrorMessage = "Моля, въведете валиден имейл адрес.")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
-        [StringLength(40, MinimumLength = 8, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
+        [Required(ErrorMessage = "Паролата е задължителна.")]
+        [StringLength(40, MinimumLength = 8, ErrorMessage = "Паролата трябва да е поне {2} и не повече от {1} символа.")]
         [DataType(DataType.Password)]
-        [Compare("ConfirmPassword", ErrorMessage = "Password does not match.")]
+        [Compare("ConfirmPassword", ErrorMessage = "Паролите не съвпадат.")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Confirm Password is required.")]
+        [Required(ErrorMessage = "Потвърдете паролата.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
+        [Display(Name = "Потвърдете паролата")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Ролята е задължителна.")]
+        public string Role { get; set; } // Ново поле за роля
     }
 }

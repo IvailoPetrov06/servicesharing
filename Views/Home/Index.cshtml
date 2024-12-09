@@ -1,118 +1,160 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-    Layout = "_Layout"; // Set the layout template
+    ViewData["Title"] = "Начална страница";
+    Layout = "_Layout"; // Задаване на шаблон за подредба
 }
-
+ 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
-
+ 
     <style>
-        /* Set background color for the body */
+        /* Задаване на фонов цвят за тялото */
         body {
-            background-color: #f4f7fc; /* Background color */
+            background-color: #f4f7fc; /* Фонов цвят */
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Ensure the body takes up the full height of the viewport */
+            min-height: 100vh; /* Осигурява пълно използване на височината на прозореца */
+            font-family: Arial, sans-serif;
         }
-
-        /* Footer styling */
+ 
+        /* Стил на футера */
         .footer {
             text-align: center;
             padding: 1rem 0;
-            background-color: #34495e; /* Dark gray background for footer */
-            color: #ecf0f1; /* Light text color */
+            background-color: #34495e; /* Тъмен сив фон за футера */
+            color: #ecf0f1; /* Светъл цвят за текст */
             font-size: 0.9rem;
-            border-top: 1px solid #2c3e50; /* Darker border at the top */
-            margin-top: auto; /* Ensures footer is at the bottom of the page */
+            border-top: 1px solid #2c3e50; /* Тъмен бордер отгоре */
+            margin-top: auto; /* Осигурява, че футера ще бъде в долната част на страницата */
         }
-
+ 
             .footer p {
                 margin: 0;
             }
-
+ 
             .footer a {
                 color: #ecf0f1;
                 text-decoration: none;
             }
-
+ 
                 .footer a:hover {
                     text-decoration: underline;
                 }
-
-        /* Make the cards appear side by side */
+ 
+        /* Подреждане на картите една до друга */
         .row {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem; /* Space between the cards */
+            gap: 1.5rem; /* Разстояние между картите */
         }
-
-        /* Ensuring the cards are properly aligned */
+ 
+        /* Осигурява правилното подреждане на картите */
         .card {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             height: 100%;
+            opacity: 0;
+            animation: fadeIn 1s forwards; /* Добавяме анимация за появяване */
         }
-
+ 
         .col-md-4 {
             flex: 1;
-            margin-bottom: 1rem; /* Add margin between rows */
+            margin-bottom: 1rem; /* Добавя разстояние между редовете */
         }
+ 
+        /* Анимация за заглавието */
+        .jumbotron {
+            animation: fadeInTitle 2s ease-in-out;
+        }
+ 
+        /* Анимация за бутони */
+        .btn-secondary {
+            transition: all 0.3s ease-in-out;
+        }
+ 
+        .btn-secondary:hover {
+            transform: scale(1.1); /* Леко уголемяване на бутона при hover */
+                background-color: #2c3e50; /* Променя цвета на бутона при hover */
+        }
+ 
+        /* Анимации */
+         @@keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+ 
+         @@keyframes fadeInTitle {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+ 
     </style>
 </head>
+ 
 <body>
-
-    <!-- Jumbotron Section -->
+ 
+    <!-- Jumbotron секция -->
     <div class="jumbotron text-center">
-        <h1 class="display-4">Welcome to ServiceSharing</h1>
-        <p class="lead">Your one-stop solution for finding and reserving reliable services and expert mechanics.</p>
+        <h1 class="display-4">Добре дошли в ServiceSharing</h1>
+        <p class="lead">Вашето решение за намиране и резервация на надеждни услуги и експертни автомеханици.</p>
         <hr class="my-4" />
-        <p>Get started by exploring our services or booking an appointment with a trusted professional.</p>
-        <a class="btn btn-primary btn-lg" asp-controller="Service" asp-action="List" role="button">Explore Services</a>
     </div>
-
-    <!-- Services Section -->
+ 
+    <!-- Услуги секция -->
     <div class="container mt-5">
-        <h2 class="mb-4">Our Top Services</h2>
+        <h2 class="mb-4">Нашите топ услуги</h2>
         <div class="row">
-            <!-- Professional Mechanics -->
+            <!-- Професионални автомеханици -->
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Professional Mechanics</h5>
-                        <p class="card-text">Get your vehicle inspected and serviced by our experienced mechanics.</p>
-                        <a class="btn btn-secondary" asp-controller="Mechanic" asp-action="List">Learn More</a>
+                        <h5 class="card-title">Професионални автомеханици</h5>
+                        <p class="card-text">Запишете автомобила си за преглед и обслужване от нашите опитни автомеханици.</p>
+                        <a class="btn btn-secondary" asp-controller="Mechanic" asp-action="List">Научете повече</a>
                     </div>
                 </div>
             </div>
-
-            <!-- Reservation -->
+ 
+            <!-- Резервация -->
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Reservation</h5>
-                        <p class="card-text">Book an appointment with our expert mechanics for your vehicle.</p>
-                        <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Create">Book Now</a>
+                        <h5 class="card-title">Резервация</h5>
+                        <p class="card-text">Запишете час при нашите експертни автомеханици за обслужване на вашето превозно средство.</p>
+                        <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Create">Резервирайте сега</a>
                     </div>
                 </div>
             </div>
-
-            <!-- Privacy and Trust -->
+ 
+            <!-- Поверителност и доверие -->
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Privacy and Trust</h5>
-                        <p class="card-text">Learn more about how we protect your data and provide a secure environment.</p>
-                        <a class="btn btn-secondary" asp-controller="Home" asp-action="Privacy">Read More</a>
+                        <h5 class="card-title">Поверителност и доверие</h5>
+                        <p class="card-text">Научете повече за това как защитаваме вашите данни и осигуряваме безопасна среда.</p>
+                        <a class="btn btn-secondary" asp-controller="Home" asp-action="Privacy">Прочетете повече</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+ 
 </body>
 </html>
+ 

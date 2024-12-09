@@ -4,15 +4,15 @@ namespace servicesharing.ViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress]
+        [Required(ErrorMessage = "Имейл е задължителен.")]
+        [EmailAddress(ErrorMessage = "Моля, въведете валиден имейл адрес.")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
+        [Required(ErrorMessage = "Паролата е задължителна.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Запомни ме?")]
         public bool RememberMe { get; set; }
     }
 }

@@ -1,42 +1,102 @@
-﻿﻿@using servicesharing.ViewModels;
+﻿@using servicesharing.ViewModels;
 @model RegisterViewModel;
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Регистрация";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
+<!-- Вграждане на CSS стилове директно в Register.cshtml -->
+<style>
+    .btn-show-password {
+        padding: 5px 10px;
+        font-size: 12px;
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+        .btn-show-password i {
+            margin-right: 5px;
+        }
+
+        .btn-show-password:hover {
+            background-color: #e2e2e2;
+        }
+
+    .input-group-append {
+        display: flex;
+    }
+</style>
+
 <div class="account-container">
     <div class="account-box">
-        <h2 class="text-center mb-4">Register</h2>
+        <h2 class="text-center mb-4">Регистрация</h2>
         <form asp-action="Register" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Име -->
             <div class="mb-3">
-                <label asp-for="Name" class="form-label"></label>
+                <label asp-for="Name" class="form-label">Име</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+
+            <!-- Имейл -->
             <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
+                <label asp-for="Email" class="form-label">Имейл</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+
+            <!-- Парола -->
             <div class="mb-3">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <label asp-for="Password" class="form-label">Парола</label>
+                <div class="input-group">
+                    <input asp-for="Password" class="form-control" id="passwordField" type="password" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-show-password" onclick="togglePassword('passwordField', 'eyeIconPassword')">
+                            <i id="eyeIconPassword" class="fa fa-eye"></i> Покажи парола
+                        </button>
+                    </div>
+                </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+
+            <!-- Потвърдете паролата -->
             <div class="mb-3">
-                <label asp-for="ConfirmPassword" class="form-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
+                <label asp-for="ConfirmPassword" class="form-label">Потвърдете паролата</label>
+                <div class="input-group">
+                    <input asp-for="ConfirmPassword" class="form-control" id="confirmPasswordField" type="password" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-show-password" onclick="togglePassword('confirmPasswordField', 'eyeIconConfirmPassword')">
+                            <i id="eyeIconConfirmPassword" class="fa fa-eye"></i> Покажи парола
+                        </button>
+                    </div>
+                </div>
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-            <input type="submit" value="Register" class="btn btn-success w-100 p-2" />
+
+            <!-- Роля -->
+            <div class="mb-3">
+                <label asp-for="Role" class="form-label">Изберете роля</label>
+                <select asp-for="Role" class="form-control">
+                    <option value="Mechanic">Автомеханик</option>
+                    <option value="Client">Клиент</option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+
+            <!-- Бутон за регистрация -->
+            <input type="submit" value="Регистрация" class="btn btn-success w-100 p-2" />
             <p class="text-center mt-2">
-                Already have an account? <a asp-controller="Account" asp-action="Login" class="text-decoration-none">Login</a>
+                Вече имате акаунт? <a asp-controller="Account" asp-action="Login" class="text-decoration-none">Влезте</a>
             </p>
             <div class="text-center">
-                <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3">Back</a>
+                <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3">Назад</a>
             </div>
         </form>
     </div>
@@ -46,4 +106,22 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
     }
+
+    <script>
+        // Функция за показване/скриване на паролата
+        function togglePassword(fieldId, iconId) {
+            var passwordField = document.getElementById(fieldId);
+            var eyeIcon = document.getElementById(iconId);
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        }
+    </script>
 }
