@@ -79,18 +79,6 @@
                 </div>
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-
-            <!-- Роля -->
-            <div class="mb-3">
-                <label asp-for="Role" class="form-label">Изберете роля</label>
-                <select asp-for="Role" class="form-control">
-                    <option value="Mechanic">Автомеханик</option>
-                    <option value="Client">Клиент</option>
-                </select>
-                <span asp-validation-for="Role" class="text-danger"></span>
-            </div>
-
-            <!-- Бутон за регистрация -->
             <input type="submit" value="Регистрация" class="btn btn-success w-100 p-2" />
             <p class="text-center mt-2">
                 Вече имате акаунт? <a asp-controller="Account" asp-action="Login" class="text-decoration-none">Влезте</a>

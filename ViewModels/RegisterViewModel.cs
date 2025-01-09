@@ -21,8 +21,5 @@ namespace servicesharing.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Потвърдете паролата")]
         public string ConfirmPassword { get; set; }
-
-        [Required(ErrorMessage = "Ролята е задължителна.")]
-        public string Role { get; set; } // Ново поле за роля
     }
 }
