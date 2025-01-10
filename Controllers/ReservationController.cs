@@ -73,7 +73,7 @@ namespace servicesharing.Controllers
         // POST: Reservation/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, ReservationViewModel model)
+        public IActionResult Edit(int id, Reservation model)
         {
             if (ModelState.IsValid)
             {
