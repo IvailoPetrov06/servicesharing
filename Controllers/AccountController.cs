@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using servicesharing.ViewModels;
-using servicesharing.ViewModels;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using servicesharing.Data.Entities;
+using System.Threading.Tasks;
 
 namespace UsersApp.Controllers
 {
@@ -28,18 +27,29 @@ namespace UsersApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = await userManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+                }
+
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)
                 {
+                    // Redirect admin to Admin Dashboard
+                    if (await userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Email or password is incorrect.");
-                    return View(model);
-                }
+
+                ModelState.AddModelError("", "Invalid login attempt.");
             }
+
             return View(model);
         }
 
@@ -53,17 +63,23 @@ namespace UsersApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                User users = new User
+                User user = new User
                 {
                     FullName = model.Name,
                     Email = model.Email,
                     UserName = model.Email,
                 };
 
-                var result = await userManager.CreateAsync(users, model.Password);
+                var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
+                    // Assign Admin role if the email matches the admin email
+                    if (model.Email == "adminemail@gmail.com")
+                    {
+                        await userManager.AddToRoleAsync(user, "Admin");
+                    }
+
                     return RedirectToAction("Login", "Account");
                 }
                 else
@@ -78,24 +94,23 @@ namespace UsersApp.Controllers
             }
             return View(model);
         }
+
         public async Task<IActionResult> Profile()
         {
-            // Извличане на информация за текущия потребител
             var user = await userManager.GetUserAsync(User);
 
             if (user == null)
             {
-                return RedirectToAction("Login", "Account");  // Ако потребителят не е намерен, го пренасочваме към Login
+                return RedirectToAction("Login", "Account");
             }
 
-            // Създаване на модел с информация за потребителя
             var model = new ProfileViewModel
             {
                 FullName = user.FullName,
                 Email = user.Email
             };
 
-            return View(model); // Връщаме изгледа с информация за потребителя
+            return View(model);
         }
 
         public IActionResult VerifyEmail()
@@ -123,7 +138,6 @@ namespace UsersApp.Controllers
             return View(model);
         }
 
-
         public IActionResult ChangePassword(string username)
         {
             if (string.IsNullOrEmpty(username))
@@ -132,7 +146,6 @@ namespace UsersApp.Controllers
             }
             return View(new ChangePasswordViewModel { Email = username });
         }
-
 
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -150,7 +163,6 @@ namespace UsersApp.Controllers
                     }
                     else
                     {
-
                         foreach (var error in result.Errors)
                         {
                             ModelState.AddModelError("", error.Description);
@@ -167,7 +179,7 @@ namespace UsersApp.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Something went wrong. try again.");
+                ModelState.AddModelError("", "Something went wrong. Try again.");
                 return View(model);
             }
         }

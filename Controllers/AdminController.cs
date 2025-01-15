@@ -1,21 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using servicesharing.Data;
 using servicesharing.Data.Entities;
-using servicesharing.ViewModels;
 
-namespace servicesharing.Controllers
+[Authorize(Roles = "Admin")]
+public class AdminController : Controller
 {
-    public class AdminController : Controller
-    {
-        public IActionResult Dashboard()
-        {
-            // Логика за административен панел
-            return View();
-        }
+    private readonly AppDbContext _context;
 
-        public IActionResult ManageUsers()
-        {
-            // Логика за управление на потребители
-            return View(new List<User>());
-        }
+    public AdminController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    public IActionResult ManageUsers()
+    {
+        var users = _context.Users.ToList();
+        return View(users);
     }
 }

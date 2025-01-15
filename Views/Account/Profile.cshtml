@@ -92,11 +92,6 @@
             <input type="email" id="email" name="NewEmail" value="@Model.Email" class="form-input" required />
             <button type="submit" class="btn btn-primary">Обнови имейла</button>
         </form>
-        <form asp-action="ChangePassword" method="post" class="form-container">
-            <label for="password" class="form-label">Промяна на парола:</label>
-            <input type="password" id="password" name="Password" class="form-input" required />
-            <button type="submit" class="btn btn-success">Промени паролата</button>
-        </form>
         <form asp-action="DeleteAccount" method="post" class="form-container">
             <button type="submit" class="btn btn-danger">Изтрий акаунта</button>
         </form>

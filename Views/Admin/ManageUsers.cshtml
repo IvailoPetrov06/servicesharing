@@ -1,29 +1,50 @@
-﻿@model List<User>
+﻿@model List<servicesharing.Data.Entities.User>
 
 @{
     ViewData["Title"] = "Управление на потребители";
 }
 
-<h2>Управление на потребители</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Име</th>
-            <th>Email</th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td>@user.FullName</td>
-                <td>@user.Email</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@user.Id">Редактиране</a> |
-                    <a asp-action="Delete" asp-route-id="@user.Id">Изтриване</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container mt-4">
+    <h2 class="text-center text-primary">Управление на потребители</h2>
+    <p class="text-muted text-center">Тук можете да редактирате потребители и да изпълнявате действия като редактиране или изтриване.</p>
+
+    <!-- Success and Error Messages -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success mt-4">@TempData["Message"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger mt-4">@TempData["Error"]</div>
+    }
+
+    <!-- User Table -->
+    <div class="table-responsive mt-4">
+        <table class="table table-striped table-hover table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col" class="text-center">Име</th>
+                    <th scope="col" class="text-center">Имейл</th>
+                    <th scope="col" class="text-center">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td class="text-center">@user.FullName</td>
+                        <td class="text-center">@user.Email</td>
+                        <td class="text-center">
+                            <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@user.Id">
+                                <i class="bi bi-pencil-square"></i> Редактиране
+                            </a>
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@user.Id" onclick="return confirm('Сигурни ли сте, че искате да изтриете този потребител?');">
+                                <i class="bi bi-trash"></i> Изтриване
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
