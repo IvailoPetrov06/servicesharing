@@ -65,7 +65,7 @@
             animation: fadeIn 1s forwards; /* Добавяме анимация за появяване */
             border: 1px solid #ddd; /* Лека рамка около картата */
             border-radius: 8px; /* Заоблени ръбове */
-            background-color: #ffffff; /* Бял фон на картите */
+            background-color: #bdc3c7; /* Бял фон на картите */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Лека сянка за ефект */
             transition: transform 0.3s ease-in-out;
         }
@@ -135,7 +135,7 @@
             flex: 1;
             text-align: center;
             padding: 15px;
-            background-color: #ffffff;
+            background-color: #bdc3c7;
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -215,7 +215,14 @@
                     <div class="card-body">
                         <h5 class="card-title">Резервация</h5>
                         <p class="card-text">Запишете час при нашите експертни автомеханици за обслужване на вашето превозно средство.</p>
-                        <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Create">Резервирайте сега</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Create">Резервирайте сега</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-secondary" asp-controller="Account" asp-action="Register">Впишете се, за да резервирате</a>
+                        }
                     </div>
                 </div>
             </div>
@@ -239,22 +246,30 @@
         <p class="text-center">Нашата платформа ви позволява лесно да намирате, резервирате и оценявате услуги от най-добрите автомеханики близо до вас. Просто следвайте тези стъпки:</p>
         <div class="row">
             <div class="step" style="animation-delay: 0.2s;">
-                <div class="step-icon">🚗</div>
+                <div class="step-icon">
+                    <img src="/images/uslugi.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
+                </div>
                 <h4>1. Търсене на услуги</h4>
                 <p>Въведете местоположението си и изберете категория услуга.</p>
             </div>
             <div class="step" style="animation-delay: 0.4s;">
-                <div class="step-icon">🔧</div>
+                <div class="step-icon">
+                    <img src="/images/Wrench.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
+                </div>
                 <h4>2. Избор на автомеханик</h4>
                 <p>Прегледайте отзиви и рейтинги, за да изберете най-добрия автомеханик.</p>
             </div>
             <div class="step" style="animation-delay: 0.6s;">
-                <div class="step-icon">📅</div>
+                <div class="step-icon">
+                    <img src="/images/reservationimage.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
+                </div>
                 <h4>3. Резервация</h4>
                 <p>Изберете удобен час и резервирайте услугата, която ви трябва.</p>
             </div>
             <div class="step" style="animation-delay: 0.8s;">
-                <div class="step-icon">✅</div>
+                <div class="step-icon">
+                    <img src="/images/tick.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
+                </div>
                 <h4>4. Получавате потвърждение</h4>
                 <p>Получавате потвърждение и напомняне за вашето обслужване.</p>
             </div>
