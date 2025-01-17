@@ -30,7 +30,7 @@ namespace UsersApp.Controllers
                 var user = await userManager.FindByEmailAsync(model.Email);
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Невалиден опит за влизане.");
                     return View(model);
                 }
 
@@ -47,7 +47,7 @@ namespace UsersApp.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError("", "Invalid login attempt.");
+                ModelState.AddModelError("", "Невалиден опит за влизане.");
             }
 
             return View(model);
@@ -127,7 +127,7 @@ namespace UsersApp.Controllers
 
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "Something is wrong!");
+                    ModelState.AddModelError("", "Нещо не е наред!");
                     return View(model);
                 }
                 else
@@ -173,13 +173,13 @@ namespace UsersApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Email not found!");
+                    ModelState.AddModelError("", "Имейлът не е намерен!");
                     return View(model);
                 }
             }
             else
             {
-                ModelState.AddModelError("", "Something went wrong. Try again.");
+                ModelState.AddModelError("", "Нещо се обърка. Опитайте отново.");
                 return View(model);
             }
         }
