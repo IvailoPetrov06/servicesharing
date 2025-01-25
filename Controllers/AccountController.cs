@@ -94,6 +94,69 @@ namespace UsersApp.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        public async Task<IActionResult> UpdateEmail(string newEmail)
+        {
+            if (string.IsNullOrWhiteSpace(newEmail))
+            {
+                TempData["Error"] = "Моля, въведете валиден имейл адрес.";
+                return RedirectToAction("Profile");
+            }
+
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                TempData["Error"] = "Потребителят не е намерен.";
+                return RedirectToAction("Login");
+            }
+
+            var token = await userManager.GenerateChangeEmailTokenAsync(user, newEmail);
+            var result = await userManager.ChangeEmailAsync(user, newEmail, token);
+
+            if (result.Succeeded)
+            {
+                user.UserName = newEmail; // Update the UserName if it's used as the login
+                await userManager.UpdateAsync(user);
+
+                TempData["Message"] = "Имейлът е успешно обновен.";
+            }
+            else
+            {
+                TempData["Error"] = "Грешка при обновяване на имейла.";
+            }
+
+            return RedirectToAction("Profile");
+        }
+        [HttpGet]
+        public IActionResult DeleteAccount()
+        {
+            return View();
+        }
+
+        // POST: Delete Account
+        [HttpPost]
+        public async Task<IActionResult> DeleteAccountConfirmed()
+        {
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                TempData["Error"] = "Потребителят не е намерен.";
+                return RedirectToAction("Login");
+            }
+
+            // Delete the user
+            var result = await userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+            {
+                await signInManager.SignOutAsync();
+                TempData["Message"] = "Акаунтът е успешно изтрит.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            TempData["Error"] = "Грешка при изтриване на акаунта.";
+            return RedirectToAction("Profile");
+        }
 
         public async Task<IActionResult> Profile()
         {

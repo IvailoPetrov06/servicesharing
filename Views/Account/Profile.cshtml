@@ -1,5 +1,4 @@
 ﻿@model servicesharing.ViewModels.ProfileViewModel
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,75 +6,209 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Профил</title>
     <style>
-        /* General Styles */
+        /* General Styling */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #4b0082, #00c6ff);
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
 
-        /* Profile Info */
+        h2 {
+            color: #fff;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 32px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        /* Profile Info Container */
         .profile-info {
-            margin: 20px auto;
+            margin: 50px auto;
             max-width: 400px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 30px;
+            border-radius: 16px;
             background-color: #ffffff;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+            animation: zoomIn 0.7s ease-out;
         }
 
         .profile-name {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 10px;
+            font-size: 24px;
+            color: #4b0082;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+            animation: slideInLeft 0.7s ease-out;
         }
 
         .profile-label {
             color: #555;
+            font-weight: bold;
         }
 
-        /* Forms */
+        .text-center p {
+            color: #4b0082;
+            font-weight: bold;
+        }
+
+        /* Form Styling */
         .form-container {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            animation: fadeIn 1.2s ease-in-out;
         }
 
         .form-label {
-            font-size: 18px;
+            font-size: 16px;
             color: #333;
+            margin-bottom: 10px;
             display: block;
-            margin-bottom: 5px;
         }
 
         .form-input {
             width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
         }
 
-        /* Buttons */
+            .form-input:focus {
+                border-color: #4b0082;
+                outline: none;
+            }
+
+        /* Button Styling */
         .btn {
-            padding: 8px 15px;
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            text-align: center;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .btn-primary {
-            background-color: #007bff;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
+            background-color: #4b0082;
         }
 
         .btn-success {
             background-color: #28a745;
         }
 
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
         .btn:hover {
             opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .btn:focus {
+            outline: none;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animations */
+        @@keyframes fadeInDown {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        @@keyframes zoomIn {
+            from
+
+        {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        }
+
+        @@keyframes slideInLeft {
+            from
+
+        {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        }
+
+        @@keyframes fadeIn {
+            from
+
+        {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+
+        }
+
+        @@keyframes fadeInUp {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        /* Responsive Design */
+        @@media screen and (max-width: 600px) {
+            .profile-info
+
+        {
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+        }
+
+        .btn {
+            font-size: 14px;
+        }
+
         }
     </style>
 </head>
@@ -87,12 +220,12 @@
         </p>
         <form asp-action="UpdateEmail" method="post" class="form-container">
             <label for="email" class="form-label">
-                <strong class="profile-label">Имейл:</strong>
+                <strong class="profile-label">Нов имейл:</strong>
             </label>
-            <input type="email" id="email" name="NewEmail" value="@Model.Email" class="form-input" required />
+            <input type="email" id="email" name="newEmail" value="@Model.Email" class="form-input"/>
             <button type="submit" class="btn btn-primary">Обнови имейла</button>
         </form>
-        <form asp-action="DeleteAccount" method="post" class="form-container">
+        <form asp-action="DeleteAccountConfirmed" method="post">
             <button type="submit" class="btn btn-danger">Изтрий акаунта</button>
         </form>
     </div>
