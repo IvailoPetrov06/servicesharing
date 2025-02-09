@@ -56,6 +56,23 @@ public class AdminController : Controller
         TempData["Message"] = "Информацията за потребителя е успешно обновена.";
         return RedirectToAction("ManageUsers");
     }
+    [HttpGet]
+    public IActionResult ChangeUserRole(string userId, string newRole)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+        if (user == null)
+        {
+            TempData["Error"] = "Потребителят не е намерен.";
+            return RedirectToAction("ManageUsers");
+        }
+
+        user.Role = newRole;
+        _context.Users.Update(user);
+        _context.SaveChanges();
+
+        TempData["Message"] = $"Ролята на {user.FullName} беше променена на {newRole}.";
+        return RedirectToAction("ManageUsers");
+    }
 
     [HttpGet]
     public IActionResult DeleteUser(string id)

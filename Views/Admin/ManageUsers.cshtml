@@ -53,6 +53,7 @@
                 <tr>
                     <th scope="col" class="text-center">Име</th>
                     <th scope="col" class="text-center">Имейл</th>
+                    <th scope="col" class="text-center">Роля</th>
                     <th scope="col" class="text-center">Действия</th>
                 </tr>
             </thead>
@@ -62,9 +63,16 @@
                     <tr>
                         <td class="text-center">@user.FullName</td>
                         <td class="text-center">@user.Email</td>
+                        <td class="text-center">@user.Role</td>
                         <td class="text-center">
                             <a class="btn btn-warning btn-sm" asp-action="EditUser" asp-route-id="@user.Id">
                                 <i class="bi bi-pencil-square"></i> Редактиране
+                            </a>
+                            <a class="btn btn-info btn-sm" asp-action="ChangeUserRole" asp-route-userId="@user.Id" asp-route-newRole="Клиент">
+                                <i class="bi bi-person"></i> Клиент
+                            </a>
+                            <a class="btn btn-success btn-sm" asp-action="ChangeUserRole" asp-route-userId="@user.Id" asp-route-newRole="Автомеханик">
+                                <i class="bi bi-tools"></i> Автомеханик
                             </a>
                             <a class="btn btn-danger btn-sm" asp-action="DeleteUser" asp-route-id="@user.Id">
                                 <i class="bi bi-trash"></i> Изтриване

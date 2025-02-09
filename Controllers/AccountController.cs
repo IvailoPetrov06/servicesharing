@@ -170,7 +170,8 @@ namespace UsersApp.Controllers
             var model = new ProfileViewModel
             {
                 FullName = user.FullName,
-                Email = user.Email
+                Email = user.Email,
+                Role = user.Role
             };
 
             return View(model);

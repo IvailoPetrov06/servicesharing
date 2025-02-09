@@ -218,6 +218,9 @@
         <p class="profile-name">
             <strong class="profile-label">Име:</strong> @Model.FullName
         </p>
+        <p class="profile-role">
+            <strong class="profile-label">Роля:</strong> @Model.Role
+        </p>
         <form asp-action="UpdateEmail" method="post" class="form-container">
             <label for="email" class="form-label">
                 <strong class="profile-label">Нов имейл:</strong>
