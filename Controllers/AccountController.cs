@@ -176,6 +176,43 @@ namespace UsersApp.Controllers
 
             return View(model);
         }
+        [HttpPost]
+        public async Task<IActionResult> ChangePasswordFromProfile(string currentPassword, string newPassword, string confirmNewPassword)
+        {
+            if (string.IsNullOrWhiteSpace(currentPassword) || string.IsNullOrWhiteSpace(newPassword) || string.IsNullOrWhiteSpace(confirmNewPassword))
+            {
+                TempData["Error"] = "Всички полета са задължителни.";
+                return RedirectToAction("Profile");
+            }
+
+            if (newPassword != confirmNewPassword)
+            {
+                TempData["Error"] = "Новата парола и потвърждението ѝ не съвпадат.";
+                return RedirectToAction("Profile");
+            }
+
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                TempData["Error"] = "Потребителят не е намерен.";
+                return RedirectToAction("Login");
+            }
+
+            var result = await userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            if (result.Succeeded)
+            {
+                TempData["Message"] = "Паролата е успешно променена.";
+                return RedirectToAction("Profile");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    TempData["Error"] = error.Description;
+                }
+                return RedirectToAction("Profile");
+            }
+        }
 
         public IActionResult VerifyEmail()
         {

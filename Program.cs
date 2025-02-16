@@ -82,7 +82,8 @@ public static class SeedData
                 UserName = adminEmail,
                 Email = adminEmail,
                 EmailConfirmed = true,
-                FullName = "Administrator" // Ensure FullName is populated
+                FullName = "Administrator", // Ensure FullName is populated
+                Role = "Admin"
             };
 
             var result = await userManager.CreateAsync(newUser, adminPassword);

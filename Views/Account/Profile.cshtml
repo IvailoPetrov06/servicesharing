@@ -219,7 +219,7 @@
             <strong class="profile-label">Име:</strong> @Model.FullName
         </p>
         <p class="profile-role">
-            <strong class="profile-label">Роля:</strong> @Model.Role
+            <strong class="profile-label"></strong> @Model.Role
         </p>
         <form asp-action="UpdateEmail" method="post" class="form-container">
             <label for="email" class="form-label">
@@ -227,6 +227,24 @@
             </label>
             <input type="email" id="email" name="newEmail" value="@Model.Email" class="form-input"/>
             <button type="submit" class="btn btn-primary">Обнови имейла</button>
+        </form>
+        <form asp-action="ChangePasswordFromProfile" method="post" class="form-container">
+            <label for="currentPassword" class="form-label">
+                <strong class="profile-label">Текуща парола:</strong>
+            </label>
+            <input type="password" id="currentPassword" name="currentPassword" class="form-input" required />
+
+            <label for="newPassword" class="form-label">
+                <strong class="profile-label">Нова парола:</strong>
+            </label>
+            <input type="password" id="newPassword" name="newPassword" class="form-input" required />
+
+            <label for="confirmNewPassword" class="form-label">
+                <strong class="profile-label">Потвърди новата парола:</strong>
+            </label>
+            <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-input" required />
+
+            <button type="submit" class="btn btn-success">Промени паролата</button>
         </form>
         <form asp-action="DeleteAccountConfirmed" method="post">
             <button type="submit" class="btn btn-danger">Изтрий акаунта</button>
