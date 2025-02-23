@@ -1,12 +1,52 @@
+/* Основни стилове за навигационните линкове */
 nav a {
-    color: #333;
-    font-weight: bold;
-    padding: 10px;
-    text-decoration: none;
-    transition: background-color 0.3s ease-in-out;
+    color: #ffffff !important; /* Бял текст */
+    background-color: #007bff !important; /* Син фон */
+    border: 2px solid #007bff; /* Син бордър */
+    border-radius: 5px;
+    padding: 8px 15px;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    display: inline-block;
+    margin: 5px; /* Разстояние между бутоните */
 }
 
-    nav a:hover {
-        background-color: #e0e0e0;
-        color: #000;
+    /* Hover, focus и active ефекти */
+    nav a:hover,
+    nav a:focus,
+    nav a:active {
+        background-color: #0056b3 !important; /* По-тъмен син при hover */
+        border-color: #0056b3 !important;
+        color: #ffffff !important;
     }
+
+
+.nav-item .nav-link,
+.auth-btn {
+    color: #007bff !important; /* Основен син цвят */
+    background-color: transparent !important; /* Прозрачен фон */
+    border: 2px solid #007bff !important; /* Син контур */
+    border-radius: 5px;
+    padding: 8px 15px;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-weight: bold;
+}
+
+    .nav-item .nav-link:hover,
+    .nav-item .nav-link:focus,
+    .nav-item .nav-link:active,
+    .auth-btn:hover,
+    .auth-btn:focus,
+    .auth-btn:active {
+        background-color: #007bff !important; /* Става плътно син */
+        color: #ffffff !important; /* Бял текст */
+    }
+
+/* Разстояние между бутоните */
+.navbar-nav .nav-item {
+    margin-right: 10px;
+}

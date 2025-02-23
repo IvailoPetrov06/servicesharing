@@ -12,7 +12,7 @@ namespace servicesharing.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Запомни ме?")]
+        [Display(Name = "Запомни ме")]
         public bool RememberMe { get; set; }
     }
 }

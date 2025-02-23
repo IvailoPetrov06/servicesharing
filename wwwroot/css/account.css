@@ -19,3 +19,12 @@
     width: 100%;
     opacity: .9;
 }
+.btn-success {
+    background-color: #4a90e2 !important; /* Основен цвят като .btn-primary */
+    border: none !important;
+}
+
+    .btn-success:hover {
+        background-color: #357ab7 !important; /* Цвят при ховър */
+    }
+

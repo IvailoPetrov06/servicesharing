@@ -2,13 +2,13 @@
 @model VerifyEmailViewModel;
 
 @{
-    ViewData["Title"] = "Потвърждаване на имейл";
+    ViewData["Title"] = "Забравена парола";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
 <div class="account-container">
     <div class="account-box">
-        <h2 class="text-center mb-4">Потвърдете имейл</h2>
+        <h2 class="text-center mb-4">Забравена парола</h2>
         <form asp-action="VerifyEmail" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 

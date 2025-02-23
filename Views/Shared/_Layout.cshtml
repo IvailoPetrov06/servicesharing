@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/ServiceSharing.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         /* За да осигурим футъра в долната част на страницата */
         html, body {
@@ -43,40 +44,56 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Начало</a>
+                                <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Home" asp-action="Index">
+                                    <i class="fas fa-home"></i> Начало
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Mechanic">Механик</a>
+                                <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Home" asp-action="Mechanic">
+                                    <i class="fas fa-wrench"></i> Механик
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Service">Автосервизни Услуги</a>
+                                <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Home" asp-action="Service">
+                                    <i class="fas fa-car"></i> Автосервизни Услуги
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Reservation">Автосервизи</a>
+                                <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Home" asp-action="Reservation">
+                                    <i class="fas fa-calendar-check"></i> Автосервизи
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Поверителност</a>
+                                <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Home" asp-action="Privacy">
+                                    <i class="fas fa-shield-alt"></i> Поверителност
+                                </a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav ms-auto d-flex gap-2">
                             @if (User.Identity.IsAuthenticated)
                             {
-
                                 <li class="nav-item">
-                                  <a class="nav-link" asp-controller="Account" asp-action="Logout">Излизане</a>
+                                    <a class="nav-link btn btn-outline-dark auth-btn" asp-controller="Account" asp-action="Profile">
+                                        <i class="fas fa-user"></i> Профил
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Account" asp-action="Profile">Профил</a>
+                                    <a class="nav-link btn btn-primary auth-btn" asp-controller="Account" asp-action="Logout">
+                                        <i class="fas fa-sign-out-alt"></i> Излизане
+                                    </a>
                                 </li>
-
                             }
                             else
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Account" asp-action="Login">Вход</a>
+                                    <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Account" asp-action="Login">
+                                        <i class="fas fa-sign-in-alt"></i> Вход
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Account" asp-action="Register">Регистрация</a>
+                                    <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Account" asp-action="Register">
+                                        <i class="fas fa-user-plus"></i> Регистрация
+                                    </a>
                                 </li>
                             }
                         </ul>
