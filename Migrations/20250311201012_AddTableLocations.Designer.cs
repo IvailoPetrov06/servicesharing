@@ -12,8 +12,8 @@ using servicesharing.Data;
 namespace servicesharing.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241106210637_CreateReservationsTable")]
-    partial class CreateReservationsTable
+    [Migration("20250311201012_AddTableLocations")]
+    partial class AddTableLocations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,7 +158,38 @@ namespace servicesharing.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("servicesharing.Models.Mechanic", b =>
+            modelBuilder.Entity("servicesharing.Data.Entities.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("servicesharing.Data.Entities.Mechanic", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -186,7 +217,7 @@ namespace servicesharing.Migrations
                     b.ToTable("Mechanics", (string)null);
                 });
 
-            modelBuilder.Entity("servicesharing.Models.Reservation", b =>
+            modelBuilder.Entity("servicesharing.Data.Entities.Reservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -209,7 +240,7 @@ namespace servicesharing.Migrations
                     b.ToTable("Reservations", (string)null);
                 });
 
-            modelBuilder.Entity("servicesharing.Models.Review", b =>
+            modelBuilder.Entity("servicesharing.Data.Entities.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -234,7 +265,7 @@ namespace servicesharing.Migrations
                     b.ToTable("Reviews", (string)null);
                 });
 
-            modelBuilder.Entity("servicesharing.Models.Service", b =>
+            modelBuilder.Entity("servicesharing.Data.Entities.Service", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -270,7 +301,7 @@ namespace servicesharing.Migrations
                     b.ToTable("Services", (string)null);
                 });
 
-            modelBuilder.Entity("servicesharing.Models.Users", b =>
+            modelBuilder.Entity("servicesharing.Data.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -316,6 +347,10 @@ namespace servicesharing.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -350,7 +385,7 @@ namespace servicesharing.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("servicesharing.Models.Users", null)
+                    b.HasOne("servicesharing.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -359,7 +394,7 @@ namespace servicesharing.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("servicesharing.Models.Users", null)
+                    b.HasOne("servicesharing.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -374,7 +409,7 @@ namespace servicesharing.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("servicesharing.Models.Users", null)
+                    b.HasOne("servicesharing.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -383,16 +418,16 @@ namespace servicesharing.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("servicesharing.Models.Users", null)
+                    b.HasOne("servicesharing.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("servicesharing.Models.Review", b =>
+            modelBuilder.Entity("servicesharing.Data.Entities.Review", b =>
                 {
-                    b.HasOne("servicesharing.Models.Mechanic", "Mechanic")
+                    b.HasOne("servicesharing.Data.Entities.Mechanic", "Mechanic")
                         .WithMany("Reviews")
                         .HasForeignKey("MechanicId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -401,9 +436,9 @@ namespace servicesharing.Migrations
                     b.Navigation("Mechanic");
                 });
 
-            modelBuilder.Entity("servicesharing.Models.Service", b =>
+            modelBuilder.Entity("servicesharing.Data.Entities.Service", b =>
                 {
-                    b.HasOne("servicesharing.Models.Mechanic", "Mechanic")
+                    b.HasOne("servicesharing.Data.Entities.Mechanic", "Mechanic")
                         .WithMany("Services")
                         .HasForeignKey("MechanicId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -412,7 +447,7 @@ namespace servicesharing.Migrations
                     b.Navigation("Mechanic");
                 });
 
-            modelBuilder.Entity("servicesharing.Models.Mechanic", b =>
+            modelBuilder.Entity("servicesharing.Data.Entities.Mechanic", b =>
                 {
                     b.Navigation("Reviews");
 

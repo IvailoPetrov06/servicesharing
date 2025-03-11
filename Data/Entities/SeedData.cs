@@ -41,5 +41,40 @@ namespace servicesharing.Data
                 }
             }
         }
+        public static async Task SeedLocationsAsync(AppDbContext context)
+        {
+            if (!context.Locations.Any()) // Проверка дали вече има записи
+            {
+                context.Locations.AddRange(new[]
+                {
+                    new Location
+                    {
+                        Name = "Автосервиз Мотор-Мастер",
+                        Address = "Бургас, ул. Примерна 12",
+                        Latitude = 42.5038,
+                        Longitude = 27.4626,
+                        Details = "Отличен сервиз за двигатели"
+                    },
+                    new Location
+                    {
+                        Name = "Автосервиз ДрайвТех",
+                        Address = "Бургас, ул. Гоце Делчев 7",
+                        Latitude = 42.5050,
+                        Longitude = 27.4660,
+                        Details = "Специализиран сервиз за скоростни кутии"
+                    },
+                    new Location
+                    {
+                        Name = "Автосервиз Октавио",
+                        Address = "София, ул. Транспортна 3",
+                        Latitude = 42.6977,
+                        Longitude = 23.3219,
+                        Details = "Опитен екип за ремонт на ходова част"
+                    }
+                });
+
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

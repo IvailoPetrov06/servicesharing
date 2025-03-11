@@ -1,148 +1,84 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using servicesharing.Data;
-using servicesharing.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using servicesharing.Data;
 using servicesharing.Data.Entities;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace servicesharing.Controllers
 {
     public class ReservationController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public ReservationController(AppDbContext context)
+        public ReservationController(AppDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        // GET: Reservation
-        public IActionResult Index()
+        // 📌 Показване на всички резервации
+        public async Task<IActionResult> Index()
         {
-            var reservations = _context.Reservations.ToList();
+            var reservations = await _context.Reservations.Include(r => r.User).ToListAsync();
             return View(reservations);
         }
 
-        // GET: Reservation/Create
+        // 📌 Форма за създаване на резервация
         public IActionResult Create()
         {
-            // Load services into ViewData for the dropdown
-            ViewData["Services"] = _context.Services.ToList();
+            ViewBag.Services = new[] { "Гуми и джанти", "Окачване и ходова част", "Двигател и трансмисия", "Спирачна система", "Диагностика и проверка", "Основни ремонти" };
             return View();
         }
 
-        // POST: Reservation/Create
+        // 📌 Обработване на създаването на резервация
+        [HttpPost]
+        public async Task<IActionResult> Create(Reservation reservation)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account"); // Пренасочване, ако няма логнат потребител
+            }
+
+            reservation.UserId = user.Id;
+            reservation.Status = ReservationStatus.Pending; // По подразбиране е "Предстоящa"
+            _context.Reservations.Add(reservation);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+
+
+        // 📌 Форма за изтриване на резервация
+        public async Task<IActionResult> Delete(int id)
+        {
+            var reservation = await _context.Reservations.FindAsync(id);
+            if (reservation == null) return NotFound();
+            return View(reservation);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Reservation model)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Reservations.Add(model);
-                _context.SaveChanges();
-                TempData["SuccessMessage"] = "Reservation successfully created!";
-                return RedirectToAction("Index");
-            }
-
-            // Reload services if there's an error
-            ViewData["Services"] = _context.Services.ToList();
-            return View(model);
-        }
-
-        // GET: Reservation/Edit/5
-        public IActionResult Edit(int id)
-        {
-            var reservation = _context.Reservations.Find(id);
-            if (reservation == null)
-            {
-                return NotFound();
-            }
-
-            var model = new ReservationViewModel
-            {
-                ServiceId = reservation.ServiceId,
-                CustomerEmail = reservation.CustomerEmail,
-                ReservationDate = reservation.ReservationDate,
-                Services = _context.Services.ToList()
-            };
-
-            // Зареждаме всички услуги от базата данни и ги подаваме към ViewData
-            ViewData["Services"] = _context.Services.ToList();
-            return View(model);
-        }
-
-        // POST: Reservation/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Reservation model)
-        {
-            if (ModelState.IsValid)
-            {
-                var reservation = _context.Reservations.Find(id);
-                if (reservation == null)
-                {
-                    return NotFound();
-                }
-
-                // Уверяваме се, че е избрана валидна услуга
-                if (model.ServiceId == null || model.ServiceId == 0)
-                {
-                    ModelState.AddModelError("ServiceId", "Моля, изберете валидна услуга.");
-                    ViewData["Services"] = _context.Services.ToList();
-                    return View(model);
-                }
-
-                // Обновяваме резервацията с новите стойности
-                reservation.ServiceId = model.ServiceId;
-                reservation.CustomerEmail = model.CustomerEmail;
-                reservation.ReservationDate = model.ReservationDate;
-
-                // Записваме промените в базата данни
-                _context.SaveChanges();
-
-                TempData["SuccessMessage"] = "Резервацията е успешно редактирана!";
-                return RedirectToAction("Index");
-            }
-
-            // Ако има грешка, презареждаме услугите и връщаме потребителя към формата с текущите данни
-            ViewData["Services"] = _context.Services.ToList();
-            return View(model);
-        }
-
-        // GET: Reservation/Delete/5
-        public IActionResult Delete(int id)
-        {
-            var reservation = _context.Reservations.Find(id);
-            if (reservation == null)
-            {
-                return NotFound();
-            }
-
-            var model = new ReservationViewModel
-            {
-                ServiceId = reservation.ServiceId,
-                CustomerEmail = reservation.CustomerEmail,
-                ReservationDate = reservation.ReservationDate
-            };
-
-            return View(model);
-        }
-
-        // POST: Reservation/DeleteConfirmed/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var reservation = _context.Reservations.Find(id);
-            if (reservation == null)
-            {
-                return NotFound();
-            }
+            var reservation = await _context.Reservations.FindAsync(id);
+            if (reservation == null) return NotFound();
 
             _context.Reservations.Remove(reservation);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Reservation successfully deleted!";
             return RedirectToAction("Index");
+        }
+
+        // 📌 Показване на списък с резервации
+        public async Task<IActionResult> List()
+        {
+            var reservations = await _context.Reservations.Include(r => r.User).ToListAsync();
+            return View(reservations);
         }
     }
 }

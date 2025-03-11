@@ -12,6 +12,7 @@ namespace servicesharing.Data
         }
 
         // DbSet за моделите
+        public DbSet<Location> Locations { get; set; }
         public DbSet<Mechanic> Mechanics { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Reservation> Reservations { get; set; }

@@ -1,15 +1,14 @@
-﻿@model IEnumerable<Reservation>
+﻿@model IEnumerable<servicesharing.Data.Entities.Reservation>
 
-<h2>Резервации</h2>
+<h2>Вашите резервации</h2>
 
-<a asp-action="Create" class="btn btn-success">Създай нова резервация</a>
-
-<table class="table table-striped mt-3">
+<table class="table">
     <thead>
         <tr>
+            <th>Имейл на клиент</th>
             <th>Услуга</th>
-            <th>Имейл</th>
-            <th>Дата на резервация</th>
+            <th>Дата и час</th>
+            <th>Статус</th>
             <th>Действия</th>
         </tr>
     </thead>
@@ -17,11 +16,11 @@
         @foreach (var reservation in Model)
         {
             <tr>
-                <td>@reservation.ServiceId</td>
-                <td>@reservation.CustomerEmail</td>
+                <td>@reservation.User.UserName</td>
+                <td>@reservation.ServiceName</td>
                 <td>@reservation.ReservationDate</td>
+                <td>@reservation.Status</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@reservation.Id" class="btn btn-primary">Редактирай</a>
                     <a asp-action="Delete" asp-route-id="@reservation.Id" class="btn btn-danger">Изтрий</a>
                 </td>
             </tr>

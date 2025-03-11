@@ -1,15 +1,23 @@
-﻿@model servicesharing.ViewModels.ReservationViewModel
+﻿@model servicesharing.Data.Entities.Reservation
 
-<h2>Потвърдете изтриването на резервацията</h2>
-
-<form asp-action="Delete" method="post">
-    <div>
-        <h4>Сигурни ли сте че, искате да изтриете тази резервация?</h4>
-        <p>Услуга: @Model.ServiceId</p>
-        <p>Имейл: @Model.CustomerEmail</p>
-        <p>Дата на резервация: @Model.ReservationDate</p>
-    </div>
-
-    <button type="submit" class="btn btn-danger">Изтрий</button>
-    <a href="@Url.Action("Index")" class="btn btn-secondary">Отказ</a>
+<h2>Изтриване на резервация</h2>
+<p>Сигурни ли сте, че искате да изтриете тази резервация?</p>
+<table class="table">
+    <tr>
+        <th>Услуга</th>
+        <td>@Model.ServiceName</td>
+    </tr>
+    <tr>
+        <th>Дата и час</th>
+        <td>@Model.ReservationDate</td>
+    </tr>
+    <tr>
+        <th>Статус</th>
+        <td>@Model.Status</td>
+    </tr>
+</table>
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Да, изтрий</button>
+    <a asp-action="Index" class="btn btn-secondary">Отказ</a>
 </form>

@@ -1,17 +1,26 @@
-﻿@{
-    ViewData["Title"] = "Списък с резервации";
-}
-
-<h2>Списък с резервации</h2>
+﻿<h2>Списък с всички резервации</h2>
 <table class="table">
     <thead>
         <tr>
+            <th>Имейл на клиент</th>
             <th>Услуга</th>
-            <th>Клиент</th>
             <th>Дата и час</th>
+            <th>Статус</th>
+            <th>Действия</th>
         </tr>
     </thead>
     <tbody>
-        <!-- Тук ще добавите редовете за резервации -->
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.User.UserName</td>
+                <td>@reservation.ServiceName</td>
+                <td>@reservation.ReservationDate</td>
+                <td>@reservation.Status</td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@reservation.Id" class="btn btn-danger">Изтрий</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
