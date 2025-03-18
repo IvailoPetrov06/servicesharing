@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using servicesharing.Data;
 
@@ -11,9 +12,11 @@ using servicesharing.Data;
 namespace servicesharing.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250317123025_AddRoleColumnToUsers")]
+    partial class AddRoleColumnToUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,10 +283,6 @@ namespace servicesharing.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("EstimatedTime")
                         .HasColumnType("float");
 
@@ -291,7 +290,7 @@ namespace servicesharing.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MechanicId")
+                    b.Property<int>("MechanicId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -300,10 +299,6 @@ namespace servicesharing.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("PriceRange")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -460,9 +455,13 @@ namespace servicesharing.Migrations
 
             modelBuilder.Entity("servicesharing.Data.Entities.Service", b =>
                 {
-                    b.HasOne("servicesharing.Data.Entities.Mechanic", null)
+                    b.HasOne("servicesharing.Data.Entities.Mechanic", "Mechanic")
                         .WithMany("Services")
-                        .HasForeignKey("MechanicId");
+                        .HasForeignKey("MechanicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Mechanic");
                 });
 
             modelBuilder.Entity("servicesharing.Data.Entities.Mechanic", b =>

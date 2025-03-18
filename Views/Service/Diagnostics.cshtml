@@ -1,0 +1,27 @@
+﻿@model List<servicesharing.Data.Entities.Service>
+
+@{
+    ViewData["Title"] = "Диагностика и проверка";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center">Диагностика и проверка</h2>
+    <table class="table table-striped table-bordered text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>Услуга</th>
+                <th>Цена (лв.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var service in Model)
+            {
+                <tr>
+                    <td>@service.Name</td>
+                    <td>@service.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Home" asp-action="Service" class="btn btn-primary mt-3">⬅ Назад</a>
+</div>

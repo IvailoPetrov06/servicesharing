@@ -49,11 +49,6 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Home" asp-action="Mechanic">
-                                    <i class="fas fa-wrench"></i> Механик
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Home" asp-action="Service">
                                     <i class="fas fa-car"></i> Автосервизни Услуги
                                 </a>
@@ -64,10 +59,23 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Profile" asp-action="MyReservations">
+                                    <i class="fas fa-calendar-check"></i> Моите резервации
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Home" asp-action="Privacy">
                                     <i class="fas fa-shield-alt"></i> Поверителност
                                 </a>
                             </li>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-danger" asp-controller="Admin" asp-action="Index">
+                                        <i class="fas fa-user-shield"></i> Админ панел
+                                    </a>
+                                </li>
+                            }
                         </ul>
                         <ul class="navbar-nav ms-auto d-flex gap-2">
                             @if (User.Identity.IsAuthenticated)

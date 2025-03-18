@@ -6,7 +6,6 @@
     <title>Услуги - ServiceSharing</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Общи стилове */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -32,7 +31,7 @@
             gap: 15px;
         }
 
-            .filters select, .filters input {
+            .filters input {
                 padding: 8px;
                 font-size: 1em;
                 border-radius: 5px;
@@ -78,210 +77,88 @@
                 color: #777;
             }
 
-            .service-card .price {
-                font-size: 1.2em;
-                color: #4CAF50;
-                margin: 10px 0;
-            }
-
-        footer {
-            background-color: #34495e;
-            color: #ecf0f1;
-            text-align: center;
-            padding: 15px 0;
-            font-size: 1rem;
-            border-top: 1px solid #2c3e50;
-            width: 100%;
-        }
-
-            footer p {
-                margin: 0;
-                font-size: 1rem;
-            }
-
-            footer a {
-                color: #ecf0f1;
+            .service-card a {
+                display: block;
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 15px;
+                border-radius: 5px;
                 text-decoration: none;
+                font-size: 1em;
+                margin-top: 10px;
             }
 
-                footer a:hover {
-                    text-decoration: underline;
+                .service-card a:hover {
+                    background-color: #45a049;
                 }
-
-        .car-selection {
-            margin-top: 20px;
-            display: none;
-        }
-
-            .car-selection select {
-                width: 200px;
-                margin-right: 10px;
-            }
-
-        .service-details {
-            margin-top: 20px;
-        }
-
-        .back-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-            .back-button:hover {
-                background-color: #45a049;
-            }
     </style>
 </head>
-
 <body>
-
     <header>
         <h1>Търсене на налични услуги за Автосервизи</h1>
         <p>Намерете наличните услуги за вашето превозно средство с лекота.</p>
     </header>
 
     <div class="container">
-        <!-- Filters Section -->
         <div class="filters">
-            <!-- Price Filter -->
-            <select id="price-filter">
-                <option value="asc">Цена по възходящ ред</option>
-                <option value="desc">Цена по низходящ ред</option>
-            </select>
-
-            <!-- Search Filter -->
             <input type="text" id="service-search" placeholder="Търсене по услуга..." />
         </div>
 
-        <!-- Services Section -->
         <section class="services" id="services-list">
-            <!-- Example Service Cards (20 services should be displayed) -->
-            <!-- Service 1 -->
-            <div class="service-card" data-price="100">
-                <img src="~/images/service1.jpg" />
-                <h3>Ремонт на двигател</h3>
-                <p>Професионален ремонт на двигатели за всички видове автомобили.</p>
-                <p class="price">Цена: 100 лв</p>
-
+            <div class="service-card">
+                <img src="~/images/brakessystem.jpg" />
+                <h3>Спирачна система</h3>
+                <p>Ремонт и поддръжка на спирачките за вашата безопасност.</p>
+                <a asp-controller="Service" asp-action="BrakeSystem">Проверете сега</a>
             </div>
 
-            <!-- Service 2 -->
-            <div class="service-card" data-price="50">
-                <img src="~/images/service2.jpg" />
-                <h3>Смяна на гуми</h3>
-                <p>Бързо и лесно сменяме гумите на вашето превозно средство.</p>
-                <p class="price">Цена: 50 лв</p>
-
+            <div class="service-card">
+                <img src="~/images/transmision.jpg" />
+                <h3>Двигател и трансмисия</h3>
+                <p>Пълна диагностика и ремонт на двигателя и трансмисията.</p>
+                <a asp-controller="Service" asp-action="EngineTransmission">Проверете сега</a>
             </div>
 
-            <!-- Service 3 -->
-            <div class="service-card" data-price="120">
+            <div class="service-card">
                 <img src="~/images/service3.jpg" />
-                <h3>Диагностика на автомобил</h3>
-                <p>Откриване на проблеми и диагностика на вашето превозно средство.</p>
-                <p class="price">Цена: 120 лв</p>
-
+                <h3>Диагностика и проверка</h3>
+                <p>Откриване на неизправности и превантивна поддръжка.</p>
+                <a asp-controller="Service" asp-action="Diagnostics">Проверете сега</a>
             </div>
 
-            <!-- Add more example service cards (4-20) -->
-            <div class="service-card" data-price="90">
-                <img src="~/images/service4.jpg" />
-                <h3>Ремонт на спирачки</h3>
-                <p>Професионален ремонт на спирачки за безопасността на вашето превозно средство.</p>
-                <p class="price">Цена: 90 лв</p>
-
+            <div class="service-card">
+                <img src="~/images/generalrepairs.jpg" />
+                <h3>Основни ремонти</h3>
+                <p>Извършване на основни ремонти за подобряване на работата на автомобила.</p>
+                <a asp-controller="Service" asp-action="GeneralRepairs">Проверете сега</a>
             </div>
 
-            <div class="service-card" data-price="70">
-                <img src="~/images/service5.jpg" />
-                <h3>Полиране на фарове</h3>
-                <p>Професионално полиране на фарове за по-добра видимост и естетика.</p>
-                <p class="price">Цена: 40 лв</p>
-
+            <div class="service-card">
+                <img src="~/images/service2.jpg" />
+                <h3>Гуми и джанти</h3>
+                <p>Смяна, баланс и ремонт на гуми и джанти.</p>
+                <a asp-controller="Service" asp-action="TiresAndWheels">Проверете сега</a>
             </div>
 
-            <div class="service-card" data-price="150">
-                <img src="~/images/service6.jpg" />
-                <h3>Смяна на масла</h3>
-                <p>Смяна на масла и филтри с гарантирано качество и безопасност.</p>
-                <p class="price">Цена: 150 лв</p>
-
+            <div class="service-card">
+                <img src="~/images/suspension.jpg" />
+                <h3>Окачване и ходова част</h3>
+                <p>Поддръжка и ремонт на окачването и ходовата част за по-комфортно пътуване.</p>
+                <a asp-controller="Service" asp-action="Suspension">Проверете сега</a>
             </div>
-
-            <div class="service-card" data-price="200">
-                <img src="~/images/service7.jpg" />
-                <h3>Чип тунинг</h3>
-                <p>Оптимизирайте производителността на вашето превозно средство с чип тунинг.</p>
-                <p class="price">Цена: 200 лв</p>
-
-            </div>
-
-            <div class="service-card" data-price="60">
-                <img src="~/images/service8.jpg " />
-                <h3>Баланс на гуми</h3>
-                <p>Професионално балансиране на гуми за безопасно и комфортно шофиране.</p>
-                <p class="price">Цена: 60 лв</p>
-
-            </div>
-
-            <div class="service-card" data-price="180">
-                <img src="~/images/service9.jpg" />
-                <h3>Зареждане на акумулатор</h3>
-                <p>Зареждане и проверка на състоянието на акумулатора за надеждно стартиране.</p>
-                <p class="price">Цена: 20 лв</p>
-            </div>
-
         </section>
-
     </div>
 
     <script>
-        // Filter Services based on search and price
-        document.getElementById('price-filter').addEventListener('change', filterServices);
-        document.getElementById('service-search').addEventListener('input', filterServices);
-
-        function filterServices() {
-            const priceFilter = document.getElementById('price-filter').value;
-            const searchQuery = document.getElementById('service-search').value.toLowerCase();
-
+        document.getElementById('service-search').addEventListener('input', function() {
+            const searchQuery = this.value.toLowerCase();
             const services = document.querySelectorAll('.service-card');
-            const servicesList = document.getElementById('services-list');
 
-            // Sort services by price
-            const sortedServices = Array.from(services).sort((a, b) => {
-                const priceA = parseInt(a.getAttribute('data-price'));
-                const priceB = parseInt(b.getAttribute('data-price'));
-                return priceFilter === 'asc' ? priceA - priceB : priceB - priceA;
-            });
-
-            servicesList.innerHTML = ''; // Clear the existing services
-
-            // Iterate through sorted services and apply search filter
-            let anyMatchingService = false; // Flag to check if any service matches the filters
-            sortedServices.forEach(service => {
+            services.forEach(service => {
                 const serviceName = service.querySelector('h3').textContent.toLowerCase();
-
-                // Check if the service matches the search query
-                const matchesSearch = !searchQuery || serviceName.includes(searchQuery);
-
-                if (matchesSearch) {
-                    servicesList.appendChild(service); // Show the service
-                    anyMatchingService = true; // Mark as matching service found
-                }
+                service.style.display = serviceName.includes(searchQuery) ? 'block' : 'none';
             });
-
-            // If no service matches the search, show a "No results" message
-            if (!anyMatchingService) {
-                servicesList.innerHTML = '<p>Няма намерени услуги по зададеното търсене. Моля, опитайте отново.</p>';
-            }
-        }
-
+        });
     </script>
-
 </body>
 </html>

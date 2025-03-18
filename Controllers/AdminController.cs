@@ -47,13 +47,17 @@ public class AdminController : Controller
             return RedirectToAction("ManageUsers");
         }
 
+        // 🔹 Обновяване на Email и всички свързани полета за логин
         user.Email = model.Email;
+        user.NormalizedEmail = model.Email.ToUpper(); // 🔹 Задължително за логин
+        user.UserName = model.Email; // 🔹 Ако UserName се използва за вход
+        user.NormalizedUserName = model.Email.ToUpper();
         user.FullName = model.FullName;
 
         _context.Users.Update(user);
         _context.SaveChanges();
 
-        TempData["Message"] = "Информацията за потребителя е успешно обновена.";
+        TempData["Message"] = "Имейлът беше успешно обновен!";
         return RedirectToAction("ManageUsers");
     }
     [HttpGet]
