@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using servicesharing.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace servicesharing.Controllers
 {

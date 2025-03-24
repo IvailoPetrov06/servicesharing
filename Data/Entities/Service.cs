@@ -9,16 +9,16 @@ namespace servicesharing.Data.Entities
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public decimal Price { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
-        public double EstimatedTime { get; set; }
+        public double? EstimatedTime { get; set; }
 
-        public string Details { get; set; }
+        public string? Details { get; set; }
 
-        public string PriceRange { get; set; }
+        public string? PriceRange { get; set; }
     }
 }

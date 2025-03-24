@@ -3,7 +3,7 @@
 <h2>Създаване на резервация</h2>
 
 <form asp-action="Create" method="post">
-    <label>Вашия :</label>
+    <label>Вашия емайл:</label>
     <input type="text" value="@User.Identity.Name" class="form-control" readonly />
 
     <label>Изберете услуга:</label>
@@ -16,7 +16,6 @@
     </select>
 
     <label>Дата и час:</label>
-    <input asp-for="ReservationDate" type="datetime-local" class="form-control" required />
-
+    <input asp-for="ReservationDate" type="datetime-local" class="form-control" required min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
     <button type="submit" class="btn btn-primary mt-2">Запази</button>
 </form>

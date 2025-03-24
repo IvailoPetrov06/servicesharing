@@ -15,9 +15,5 @@ namespace servicesharing.Data.Entities
         public string Certifications { get; set; }
 
         public double Rating { get; set; }
-
-        public List<Service> Services { get; set; }
-
-        public List<Review> Reviews { get; set; }
     }
 }

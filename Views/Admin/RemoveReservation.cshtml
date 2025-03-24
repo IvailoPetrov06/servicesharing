@@ -1,0 +1,15 @@
+﻿@model servicesharing.Data.Entities.Reservation
+
+@{
+    ViewData["Title"] = "Потвърждение за изтриване";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>Сигурни ли сте, че искате да изтриете резервацията на <strong>@Model.User?.FullName</strong> със статус <strong>@Model.Status</strong>?</p>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Да, изтрий</button>
+    <a asp-action="Manage" class="btn btn-secondary">Отказ</a>
+</form>
