@@ -1,0 +1,30 @@
+﻿@model IEnumerable<servicesharing.Data.Entities.Promotion>
+
+@{
+    ViewData["Title"] = "Налични промоции";
+}
+
+<h2 class="mb-4">Налични промоции</h2>
+
+@if (!Model.Any())
+{
+    <p>В момента няма активни промоции.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var promo in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@promo.Title</h5>
+                        <p class="card-text">@promo.Description</p>
+                        <p><strong>Валидна до:</strong> @promo.ValidUntil.ToShortDateString()</p>
+                        <p><strong>Услуга:</strong> @promo.Service?.Name</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "Начална страница";
     Layout = "_Layout"; // Задаване на шаблон за подредба
 }
@@ -212,6 +212,24 @@
                         else
                         {
                             <a class="btn btn-secondary" asp-controller="Account" asp-action="Register">Впишете се, за да резервирате</a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Налични промоции</h5>
+                        <p class="card-text">Разгледайте актуалните оферти за автосервизни услуги и спестете.</p>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-secondary" asp-controller="Promotion" asp-action="Index">Виж всички</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-secondary" asp-controller="Account" asp-action="Login">Впишете се, за да разгледате</a>
                         }
                     </div>
                 </div>

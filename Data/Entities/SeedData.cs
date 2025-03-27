@@ -76,6 +76,36 @@ namespace servicesharing.Data
                 await context.SaveChangesAsync();
             }
         }
+        public static async Task SeedPromotionsAsync(AppDbContext context, UserManager<User> userManager)
+        {
+            // Вземаме администратора, който създадохме по-рано
+            var admin = await userManager.FindByEmailAsync("adminemail@gmail.com");
+            if (admin == null) return;
+
+            // Вземаме няколко услуги от базата
+            var service1 = context.Services.FirstOrDefault(s => s.Name.Contains("масло"));
+            var service2 = context.Services.FirstOrDefault(s => s.Name.Contains("гуми"));
+
+            if (service1 == null || service2 == null) return;
+
+            // Проверяваме дали вече има промоции
+            if (!context.Promotions.Any())
+            {
+                context.Promotions.AddRange(new[]
+                {
+            new Promotion
+            {
+                Title = "Отстъпка за смяна на масло",
+                Description = "Вземете 20% намаление до края на месеца!",
+                ValidUntil = DateTime.Now.AddMonths(1),
+                ServiceId = service1.Id,
+                UserId = admin.Id
+            },
+        });
+
+                await context.SaveChangesAsync();
+            }
+        }
         public static async Task SeedServicesAsync(AppDbContext context)
         {
             if (!context.Services.Any())

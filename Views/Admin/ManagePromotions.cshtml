@@ -1,0 +1,47 @@
+﻿@model IEnumerable<servicesharing.Data.Entities.Promotion>
+@{
+    ViewData["Title"] = "Управление на промоции";
+}
+
+<h2 class="mb-3">Управление на промоции</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@if (!Model.Any())
+{
+    <p>Няма активни промоции в момента.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Заглавие</th>
+                <th>Услуга</th>
+                <th>Валидна до</th>
+                <th>Създадена от</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var promo in Model)
+            {
+                <tr>
+                    <td>@promo.Title</td>
+                    <td>@promo.Service?.Name</td>
+                    <td>@promo.ValidUntil.ToShortDateString()</td>
+                    <td>@promo.User?.FullName</td>
+                    <td>
+                        <form asp-action="Delete" method="post" asp-controller="AdminPromotion">
+                            <input type="hidden" name="id" value="@promo.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Изтрий</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

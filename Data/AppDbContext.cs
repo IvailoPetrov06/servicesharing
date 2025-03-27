@@ -12,6 +12,7 @@ namespace servicesharing.Data
         }
 
         // DbSet за моделите
+        public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Mechanic> Mechanics { get; set; }
         public DbSet<Service> Services { get; set; }
@@ -26,6 +27,7 @@ namespace servicesharing.Data
             modelBuilder.Entity<Mechanic>().ToTable("Mechanics");
             modelBuilder.Entity<Service>().ToTable("Services");
             modelBuilder.Entity<Reservation>().ToTable("Reservations");
+            modelBuilder.Entity<Promotion>().ToTable("Promotions");
         }
     }
 }
