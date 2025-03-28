@@ -39,37 +39,59 @@ namespace servicesharing.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
+
+            migrationBuilder.AddColumn<string>(
+                name: "Description",
+                table: "Services",
+                type: "nvarchar(max)",
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "Description",
+                table: "Services");
+
             migrationBuilder.AlterColumn<string>(
                 name: "PriceRange",
                 table: "Services",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "ImageUrl",
                 table: "Services",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<double>(
                 name: "EstimatedTime",
                 table: "Services",
                 type: "float",
                 nullable: false,
-                defaultValue: 0.0);
+                defaultValue: 0.0,
+                oldClrType: typeof(double),
+                oldType: "float",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "Details",
                 table: "Services",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
         }
     }
 }
