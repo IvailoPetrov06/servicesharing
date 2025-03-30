@@ -10,6 +10,7 @@
         <thead class="table-dark">
             <tr>
                 <th>Услуга</th>
+                <th>Дата</th>
                 <th>Статус</th>
             </tr>
         </thead>
@@ -18,6 +19,7 @@
             {
                 <tr>
                     <td>@reservation.ServiceName</td>
+                    <td>@reservation.ReservationDate.ToString("dd.MM.yyyy HH:mm")</td>
                     <td>
                         @if (reservation.Status.ToString() == "Pending")
                         {

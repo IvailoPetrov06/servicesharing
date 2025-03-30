@@ -4,6 +4,48 @@
     ViewData["Title"] = "Налични промоции";
 }
 
+<style>
+    .promo-card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        height: 100%;
+        transition: all 0.3s ease-in-out;
+        animation: fadeIn 0.8s forwards;
+        opacity: 0;
+    }
+
+        .promo-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .promo-card h5 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .promo-card p {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+    @@keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
 <h2 class="mb-4">Налични промоции</h2>
 
 @if (!Model.Any())
@@ -16,13 +58,11 @@ else
         @foreach (var promo in Model)
         {
             <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">@promo.Title</h5>
-                        <p class="card-text">@promo.Description</p>
-                        <p><strong>Валидна до:</strong> @promo.ValidUntil.ToShortDateString()</p>
-                        <p><strong>Услуга:</strong> @promo.Service?.Name</p>
-                    </div>
+                <div class="promo-card">
+                    <h5>@promo.Title</h5>
+                    <p>@promo.Description</p>
+                    <p><strong>Валидна до:</strong> @promo.ValidUntil.ToShortDateString()</p>
+                    <p><strong>Услуга:</strong> @promo.Service?.Name</p>
                 </div>
             </div>
         }

@@ -54,6 +54,7 @@ namespace servicesharing.Controllers
 
 
 
+   
         // 📌 Форма за изтриване на резервация
         public async Task<IActionResult> Delete(int id)
         {
@@ -61,12 +62,20 @@ namespace servicesharing.Controllers
             if (reservation == null) return NotFound();
             return View(reservation);
         }
+
+        // 📌 Потвърждение на изтриване — САМО СОБСТВЕНИКЪТ МОЖЕ
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var reservation = await _context.Reservations.FindAsync(id);
             if (reservation == null) return NotFound();
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || reservation.UserId != user.Id)
+            {
+                return Forbid(); // Защита от директно изпращане на заявка
+            }
 
             _context.Reservations.Remove(reservation);
             await _context.SaveChangesAsync();

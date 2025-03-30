@@ -127,6 +127,14 @@ public static class SeedData
                 ServiceId = service1.Id,
                 UserId = admin.Id
             },
+            new Promotion
+            {
+                Title = "Безплатен монтаж на гуми",
+                Description = "Вземи безплатен монтаж при смяна на 4 гуми!",
+                ValidUntil = DateTime.Now.AddDays(10),
+                ServiceId = service2.Id,
+                UserId = admin.Id
+            }
         });
 
             await context.SaveChangesAsync();

@@ -1,23 +1,45 @@
 ﻿@model servicesharing.Data.Entities.Reservation
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<servicesharing.Data.Entities.User> UserManager
 
-<h2>Изтриване на резервация</h2>
-<p>Сигурни ли сте, че искате да изтриете тази резервация?</p>
-<table class="table">
+@{
+    ViewData["Title"] = "Изтриване на резервация";
+    var currentUserId = UserManager.GetUserId(User);
+}
+
+<h2 class="text-center mb-4">Изтриване на резервация</h2>
+
+<p class="text-center">Сигурни ли сте, че искате да изтриете тази резервация?</p>
+
+<table class="table table-bordered w-75 mx-auto">
     <tr>
         <th>Услуга</th>
         <td>@Model.ServiceName</td>
     </tr>
     <tr>
         <th>Дата и час</th>
-        <td>@Model.ReservationDate</td>
+        <td>@Model.ReservationDate.ToString("dd.MM.yyyy HH:mm")</td>
     </tr>
     <tr>
         <th>Статус</th>
         <td>@Model.Status</td>
     </tr>
 </table>
-<form asp-action="DeleteConfirmed" method="post">
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Да, изтрий</button>
-    <a asp-action="Index" class="btn btn-secondary">Отказ</a>
-</form>
+
+@if (Model.UserId == currentUserId)
+{
+    <form asp-action="DeleteConfirmed" method="post" class="text-center mt-3">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Да, изтрий</button>
+        <a asp-action="Index" class="btn btn-secondary">Отказ</a>
+    </form>
+}
+else
+{
+    <div class="alert alert-warning text-center mt-4 w-75 mx-auto">
+        Само създателя на резервацията може да я изтрие.
+    </div>
+    <div class="text-center">
+        <a asp-action="Index" class="btn btn-primary">Назад</a>
+    </div>
+}

@@ -62,11 +62,11 @@
             justify-content: space-between;
             height: 100%;
             opacity: 0;
-            animation: fadeIn 1s forwards; /* Добавяме анимация за появяване */
-            border: 1px solid #ddd; /* Лека рамка около картата */
-            border-radius: 8px; /* Заоблени ръбове */
-            background-color: #bdc3c7; /* Бял фон на картите */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Лека сянка за ефект */
+            animation: fadeIn 1s forwards;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #ffffff; /* сменено от #bdc3c7 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
         }
 
@@ -87,15 +87,21 @@
 
         /* Анимация за бутони */
         .btn-secondary {
+            background-color: #4CAF50; /* Зелен основен цвят */
+            color: white;
             padding: 12px 30px;
             font-size: 1.1rem;
             border-radius: 5px;
             transition: all 0.3s ease-in-out;
+            border: none;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
         }
 
             .btn-secondary:hover {
+                background-color: #45a049; /* Тъмнозелено при hover */
                 transform: scale(1.1); /* Леко уголемяване на бутона при hover */
-                background-color: #2c3e50; /* Променя цвета на бутона при hover */
             }
 
         /* Анимации */
@@ -135,7 +141,7 @@
             flex: 1;
             text-align: center;
             padding: 15px;
-            background-color: #bdc3c7;
+            background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -191,7 +197,9 @@
     <div class="jumbotron text-center">
         <h1 class="display-4">Добре дошли в ServiceSharing</h1>
         <hr class="my-4" />
-        <p>Ние ви свързваме с висококвалифицирани автомеханици и сертифицирани сервизи за диагностика, ремонт, смяна на масла и други автосервизни услуги. На платформата ни можете да намерите точно това, което търсите, като резервирате удобно време за обслужване, преглеждате отзиви и оценки, и се уверите в качеството на услугата.</p>
+        <p>
+            Ние ви свързваме с висококвалифицирани автомеханици и сертифицирани сервизи за диагностика, ремонт, смяна на масла и други автосервизни услуги. На платформата ни можете да намерите точно това, което търсите, като резервирате удобно време за обслужване и ще се уверите в качеството на услугата. С всяко посещение в наличен сервиз, регистриран в платформата, получавате специални <strong>отстъпки и промоции</strong>. Колкото по-често се възползвате от услугите, толкова повече спестявате!
+        </p>
     </div>
 
     <!-- Услуги секция -->
@@ -251,34 +259,29 @@
     <!-- Как работи платформата -->
     <div class="container mt-5">
         <h2 class="mb-4 text-center">Как работи?</h2>
-        <p class="text-center">Нашата платформа ви позволява лесно да намирате, резервирате и оценявате услуги от най-добрите автомеханики близо до вас. Просто следвайте тези стъпки:</p>
+        <p class="text-center">
+            С нашата платформа бързо и лесно откривате подходящи автомеханици и услуги в близост до вас. Резервирайте удобно време, проследявайте статуса на заявките си и се възползвайте от натрупващи се отстъпки. Следвайте тези три лесни стъпки:
+        </p>
         <div class="row">
             <div class="step" style="animation-delay: 0.2s;">
                 <div class="step-icon">
                     <img src="/images/uslugi.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
                 </div>
                 <h4>1. Търсене на услуги</h4>
-                <p>Въведете местоположението си и изберете категория услуга.</p>
-            </div>
-            <div class="step" style="animation-delay: 0.4s;">
-                <div class="step-icon">
-                    <img src="/images/Wrench.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
-                </div>
-                <h4>2. Избор на автомеханик</h4>
-                <p>Прегледайте отзиви и рейтинги, за да изберете най-добрия автомеханик.</p>
+                <p>Намерете наличните услуги за вашето превозно средство с лекота.</p>
             </div>
             <div class="step" style="animation-delay: 0.6s;">
                 <div class="step-icon">
                     <img src="/images/reservationimage.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
                 </div>
-                <h4>3. Резервация</h4>
+                <h4>2. Резервация</h4>
                 <p>Изберете удобен час и резервирайте услугата, която ви трябва.</p>
             </div>
             <div class="step" style="animation-delay: 0.8s;">
                 <div class="step-icon">
                     <img src="/images/tick.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
                 </div>
-                <h4>4. Получавате потвърждение</h4>
+                <h4>3. Получавате потвърждение</h4>
                 <p>Получавате потвърждение и напомняне за вашето обслужване.</p>
             </div>
         </div>
@@ -286,10 +289,9 @@
 
     <!-- Икони за социални мрежи -->
     <div class="social-icons">
-        <p>Следвайте ни на:</p>
+        <p>Последвайте ни в социалните мрежи:</p>
         <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
         <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
     </div>
-
 </body>
 </html>
