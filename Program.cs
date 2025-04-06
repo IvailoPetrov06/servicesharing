@@ -180,6 +180,7 @@ public static class SeedData
 
         await context.SaveChangesAsync();
     }
+
     public static async Task SeedServicesAsync(AppDbContext context)
     {
         if (!context.Services.Any())

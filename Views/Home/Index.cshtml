@@ -25,23 +25,18 @@
         /* Стил на футера */
         .footer {
             text-align: center;
-            padding: 1rem 0;
-            background-color: #34495e; /* Тъмен сив фон за футера */
-            color: #ecf0f1; /* Светъл цвят за текст */
+            padding: 0.5rem 0;
+            background-color: #212529;
+            color: #ecf0f1;
             font-size: 0.9rem;
-            border-top: 1px solid #2c3e50; /* Тъмен бордер отгоре */
-            margin-top: auto; /* Осигурява, че футера ще бъде в долната част на страницата */
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
-
-            .footer p {
-                margin: 0;
-            }
 
             .footer a {
                 color: #ecf0f1;
                 text-decoration: none;
-                margin: 0 10px;
-                font-size: 1.5rem;
             }
 
                 .footer a:hover {
@@ -175,19 +170,26 @@
 
             .social-icons p {
                 font-size: 1.5rem;
-                color: #34495e;
+                color: #000000;
             }
 
             .social-icons a {
-                color: #34495e;
                 text-decoration: none;
                 margin: 0 20px;
-                font-size: 3rem; /* По-големи икони */
+                font-size: 3rem;
             }
 
-                .social-icons a:hover {
-                    color: #3498db;
-                }
+        /* Instagram градиентен ефект */
+        .fa-instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Twitter син */
+        .fa-twitter {
+            color: #1da1f2;
+        }
     </style>
 </head>
 
@@ -195,7 +197,7 @@
 
     <!-- Jumbotron секция -->
     <div class="jumbotron text-center">
-        <h1 class="display-4">Добре дошли в ServiceSharing</h1>
+        <h1 class="display-4">Платформата за автосервизни услуги, на която можеш да разчиташ</h1>
         <hr class="my-4" />
         <p>
             Ние ви свързваме с висококвалифицирани автомеханици и сертифицирани сервизи за диагностика, ремонт, смяна на масла и други автосервизни услуги. На платформата ни можете да намерите точно това, което търсите, като резервирате удобно време за обслужване и ще се уверите в качеството на услугата. С всяко посещение в наличен сервиз, регистриран в платформата, получавате специални <strong>отстъпки и промоции</strong>. Колкото по-често се възползвате от услугите, толкова повече спестявате!
