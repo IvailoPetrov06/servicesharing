@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,7 +14,6 @@
     <link rel="stylesheet" href="~/ServiceSharing.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* За да осигурим футъра в долната част на страницата */
         html, body {
             height: 100%;
             margin: 0;
@@ -32,16 +35,13 @@
     </style>
 </head>
 <body>
-    <!-- Основен контейнер с Flexbox -->
     <div class="wrapper">
         <header>
             <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container-fluid">
-                    <!-- Лого (без текст) -->
                     <a class="navbar-brand d-flex align-items-center" style="padding: 0; background: transparent; border: none;">
-                        <img src="~/images/servicesharinga.png" alt="Logo" style="height: 50px; border: none; outline: none; box-shadow: none;">
+                        <span style="font-size: 1.3rem; font-weight: bold; color: white;">ServiceSharing</span>
                     </a>
-                    <!-- Мобилно меню бутон -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -63,14 +63,9 @@
                                     <i class="fas fa-calendar-check"></i> Автосервизи
                                 </a>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Profile" asp-action="MyReservations">
                                     <i class="fas fa-calendar-check"></i> Моите резервации
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-outline-primary auth-btn" asp-controller="Home" asp-action="Privacy">
-                                    <i class="fas fa-shield-alt"></i> Поверителност
                                 </a>
                             </li>
                             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
@@ -115,7 +110,6 @@
             </nav>
         </header>
 
-        <!-- Съдържание на страницата -->
         <div class="content">
             <div class="container">
                 <main role="main" class="pb-3">
@@ -124,12 +118,33 @@
             </div>
         </div>
 
-        <!-- Футър, който ще бъде винаги в долната част на страницата -->
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2024 - ServiceSharing - <a asp-area="" asp-controller="Home" asp-action="Privacy">Поверителност</a>
-            </div>
-        </footer>
+        @* Скриваме футъра, ако контролерът започва с "Admin" *@
+        @if (!(currentController?.StartsWith("Admin") ?? false))
+        {
+            <footer class="custom-footer">
+                <div class="footer-wrapper">
+                    <div class="footer-section">
+                        <h4>ЗА ВРЪЗКА С НАС</h4>
+                        <ul>
+                            <li>Email: <a href="mailto:ivkobg73@gmail.com">ivkobg73@gmail.com</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>НАВИГАЦИЯ</h4>
+                        <ul>
+                            <li><a href="/Home/Service">Автосервизни Услуги</a></li>
+                            <li><a href="/Home/Reservation">Автосервизи</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <img src="/images/servicesharngos.png" alt="Лого" class="logo-img">
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2024 - ServiceSharing - <a asp-area="" asp-controller="Home" asp-action="Privacy">Поверителност</a>
+                </div>
+            </footer>
+        }
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

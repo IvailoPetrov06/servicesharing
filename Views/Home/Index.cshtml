@@ -1,6 +1,6 @@
-﻿﻿@{
+﻿@{
     ViewData["Title"] = "Начална страница";
-    Layout = "_Layout"; // Задаване на шаблон за подредба
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
@@ -9,48 +9,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* Задаване на фонов цвят за тялото */
         body {
-            background-color: #f4f7fc; /* Фонов цвят */
+            background-color: #f4f7fc;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Осигурява пълно използване на височината на прозореца */
+            min-height: 100vh;
             font-family: Arial, sans-serif;
         }
 
-        /* Стил на футера */
-        .footer {
-            text-align: center;
-            padding: 0.5rem 0;
-            background-color: #212529;
-            color: #ecf0f1;
-            font-size: 0.9rem;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
-
-            .footer a {
-                color: #ecf0f1;
-                text-decoration: none;
-            }
-
-                .footer a:hover {
-                    text-decoration: underline;
-                }
-
-        /* Подреждане на картите една до друга */
         .row {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem; /* Разстояние между картите */
+            gap: 1.5rem;
         }
 
-        /* Осигурява правилното подреждане на картите */
         .card {
             display: flex;
             flex-direction: column;
@@ -60,29 +35,40 @@
             animation: fadeIn 1s forwards;
             border: 1px solid #ddd;
             border-radius: 8px;
-            background-color: #ffffff; /* сменено от #bdc3c7 */
+            background-color: #ffffff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
         }
 
             .card:hover {
-                transform: translateY(-5px); /* Леко повдигане на картата при hover */
+                transform: translateY(-5px);
             }
+
+        .equal-height .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .equal-height .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
         .col-md-4 {
             flex: 1;
-            margin-bottom: 1rem; /* Добавя разстояние между редовете */
+            margin-bottom: 1rem;
             max-width: 300px;
         }
 
-        /* Анимация за заглавието */
         .jumbotron {
             animation: fadeInTitle 2s ease-in-out;
         }
 
-        /* Анимация за бутони */
         .btn-secondary {
-            background-color: #4CAF50; /* Зелен основен цвят */
+            background-color: #4CAF50;
             color: white;
             padding: 12px 30px;
             font-size: 1.1rem;
@@ -95,43 +81,12 @@
         }
 
             .btn-secondary:hover {
-                background-color: #45a049; /* Тъмнозелено при hover */
-                transform: scale(1.1); /* Леко уголемяване на бутона при hover */
+                background-color: #45a049;
+                transform: scale(1.1);
             }
 
-        /* Анимации */
-        @@keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
 
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
-        @@keyframes fadeInTitle {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Икони за услугите */
-        .service-icon {
-            font-size: 3rem;
-            color: #34495e;
-            margin-bottom: 1rem;
-        }
-
-        /* Стил за стъпки как работи */
         .step {
             flex: 1;
             text-align: center;
@@ -149,151 +104,189 @@
                 margin-bottom: 10px;
             }
 
-        /* Анимация за стъпките */
-        @@keyframes fadeInStep {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .section-blue {
+            background: linear-gradient(90deg, #093d74 0%, #145da0 100%);
+            padding: 60px 20px;
+            color: white;
+            width: 99.6vw; /* Ensures it stretches across the full viewport width */
+            margin-left: calc(-50vw + 50%); /* Adjusts to stretch properly */
         }
 
-        /* Стил за иконите на социалните мрежи */
-        .social-icons {
+        .promo-section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 40px;
             text-align: center;
-            margin: 20px 0;
         }
 
-            .social-icons p {
-                font-size: 1.5rem;
-                color: #000000;
-            }
-
-            .social-icons a {
-                text-decoration: none;
-                margin: 0 20px;
-                font-size: 3rem;
-            }
-
-        /* Instagram градиентен ефект */
-        .fa-instagram {
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .promo-card {
+            background-color: white;
+            color: #093d74;
+            border-radius: 10px;
+            padding: 30px 25px;
+            max-width: 350px;
+            width: 100%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            text-align: center;
         }
 
-        /* Twitter син */
-        .fa-twitter {
-            color: #1da1f2;
+            .promo-card:hover {
+                transform: translateY(-8px);
+            }
+
+            .promo-card h4 {
+                font-size: 1.4rem;
+                font-weight: bold;
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+
+            .promo-card p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+        .promo-icon img {
+            width: 60px;
+            height: auto;
+        }
+
+        .inner-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        @@media (max-width: 768px) {
+            .row
+
+        {
+            flex-direction: column;
+            align-items: center;
+        }
+
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Jumbotron секция -->
-    <div class="jumbotron text-center">
-        <h1 class="display-4">Платформата за автосервизни услуги, на която можеш да разчиташ</h1>
-        <hr class="my-4" />
-        <p>
-            Ние ви свързваме с висококвалифицирани автомеханици и сертифицирани сервизи за диагностика, ремонт, смяна на масла и други автосервизни услуги. На платформата ни можете да намерите точно това, което търсите, като резервирате удобно време за обслужване и ще се уверите в качеството на услугата. С всяко посещение в наличен сервиз, регистриран в платформата, получавате специални <strong>отстъпки и промоции</strong>. Колкото по-често се възползвате от услугите, толкова повече спестявате!
-        </p>
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/images/otstupki.png" class="d-block w-100" alt="Special Discounts">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/avtoserviz.png" class="d-block w-100" alt="Special Offers">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 
-    <!-- Услуги секция -->
-    <div class="container mt-5">
-        <h2 class="mb-4">Нашите топ услуги</h2>
-        <div class="row">
+    <div class="jumbotron text-center">
+        <hr class="my-4" />
+        <div style="background-color: #ffffff; border-left: 5px solid black; padding: 24px 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); margin-bottom: 30px;">
+            <p style="font-size: 1.15rem; line-height: 1.8; color: black; font-weight: 500; margin: 0; text-align: justify;">
+                Ние ви свързваме с <strong style="color: black;">висококвалифицирани автомеханици</strong> и сертифицирани сервизи за диагностика, ремонт, смяна на масла и други автосервизни услуги.
+                На платформата ни можете да намерите точно това, което търсите, като резервирате удобно време за обслужване и ще се уверите в качеството на услугата.
+                С всяко посещение в наличен сервиз, регистриран в платформата, получавате специални
+                <strong style="color: black;">отстъпки и промоции</strong>. Колкото по-често се възползвате от услугите, толкова повече спестявате!
+            </p>
+        </div>
 
-            <!-- Резервация -->
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Резервация</h5>
-                        <p class="card-text">Запишете час при нашите експертни автомеханици за обслужване на вашето превозно средство.</p>
+        <!-- Новата секция: Промоции и Поверителност със стилистика -->
+        <section class="section-blue">
+            <div class="inner-wrapper">
+                <h2 class="promo-section-title">Нашите топ услуги</h2>
+                <div class="row">
+                    <div class="promo-card">
+                        <div class="promo-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2841/2841350.png" alt="Резервация">
+                        </div>
+                        <h4>Резервация</h4>
+                        <p>Запишете час при нашите експертни автомеханици за обслужване на вашето превозно средство.</p>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <a class="btn btn-secondary" asp-controller="Reservation" asp-action="Create">Резервирайте сега</a>
                         }
                         else
                         {
-                            <a class="btn btn-secondary" asp-controller="Account" asp-action="Register">Впишете се, за да резервирате</a>
+                            <a class="btn btn-secondary" asp-controller="Account" asp-action="Register">Впишете се</a>
                         }
                     </div>
-                </div>
-            </div>
 
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Налични промоции</h5>
-                        <p class="card-text">Разгледайте актуалните оферти за автосервизни услуги и спестете.</p>
-
+                    <div class="promo-card">
+                        <div class="promo-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/512/4315/4315445.png" alt="Промоции">
+                        </div>
+                        <h4>Промоции</h4>
+                        <p>Възползвайте се от актуални оферти и отстъпки за автосервизни услуги.</p>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <a class="btn btn-secondary" asp-controller="Promotion" asp-action="Index">Виж всички</a>
                         }
                         else
                         {
-                            <a class="btn btn-secondary" asp-controller="Account" asp-action="Login">Впишете се, за да разгледате</a>
+                            <a class="btn btn-secondary" asp-controller="Account" asp-action="Login">Впишете се</a>
                         }
                     </div>
+
+                    <div class="promo-card">
+                        <div class="promo-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/512/565/565547.png" alt="Поверителност">
+                        </div>
+                        <h4>Поверителност</h4>
+                        <p>Вашата сигурност е наш приоритет. Научете повече как пазим вашите данни.</p>
+                        <a class="btn btn-secondary" asp-controller="Home" asp-action="Privacy">Прочетете повече</a>
+                    </div>
+
                 </div>
             </div>
+        </section>
+        <section style="background: #f5f5f5 url('https://www.transparenttextures.com/patterns/symphony.png'); padding: 60px 20px; width: 99.6vw; margin-left: calc(-50vw + 50%);">
+            <div class="container text-center">
+                <h2 style="color: #007bff; font-weight: bold; margin-bottom: 20px;">Как работи?</h2>
+                <p style="max-width: 750px; margin: 0 auto 40px; font-size: 1.1rem; color: #333;">
+                    С нашата платформа бързо и лесно откривате подходящи автомеханици и услуги в близост до вас. Резервирайте удобно време, проследявайте статуса на заявките си и се възползвайте от натрупващи се отстъпки. Следвайте тези три лесни стъпки:
+                </p>
+                </p>
+                <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                    <!-- Стъпка 1 -->
+                    <div style="background: #fff; padding: 30px; border-radius: 10px; width: 250px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <div style="background-color: #007bff; border-radius: 50%; width: 70px; height: 70px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Търсене" style="width: 35px; height: 35px;">
+                        </div>
+                        <h4 style="color: #007bff; font-size: 1.2rem;">1. Търсене на услуги</h4>
+                        <p style="font-size: 0.95rem;">Намерете наличните услуги за вашето превозно средство с лекота.</p>
+                    </div>
 
-            <!-- Поверителност и доверие -->
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Поверителност и доверие</h5>
-                        <p class="card-text">Научете повече за това как защитаваме вашите данни и осигуряваме безопасна среда.</p>
-                        <a class="btn btn-secondary" asp-controller="Home" asp-action="Privacy">Прочетете повече</a>
+                    <!-- Стъпка 2 -->
+                    <div style="background: #fff; padding: 30px; border-radius: 10px; width: 250px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <div style="background-color: #007bff; border-radius: 50%; width: 70px; height: 70px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png" alt="Резервация" style="width: 35px; height: 35px;">
+                        </div>
+                        <h4 style="color: #007bff; font-size: 1.2rem;">2. Резервация</h4>
+                        <p style="font-size: 0.95rem;">Изберете удобен час и резервирайте услугата, която ви трябва.</p>
+                    </div>
+
+                    <!-- Стъпка 3 -->
+                    <div style="background: #fff; padding: 30px; border-radius: 10px; width: 250px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <div style="background-color: #007bff; border-radius: 50%; width: 70px; height: 70px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Потвърждение" style="width: 35px; height: 35px;">
+                        </div>
+                        <h4 style="color: #007bff; font-size: 1.2rem;">3. Потвърждение</h4>
+                        <p style="font-size: 0.95rem;">Получавате потвърждение и напомняне за вашето обслужване.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Как работи платформата -->
-    <div class="container mt-5">
-        <h2 class="mb-4 text-center">Как работи?</h2>
-        <p class="text-center">
-            С нашата платформа бързо и лесно откривате подходящи автомеханици и услуги в близост до вас. Резервирайте удобно време, проследявайте статуса на заявките си и се възползвайте от натрупващи се отстъпки. Следвайте тези три лесни стъпки:
-        </p>
-        <div class="row">
-            <div class="step" style="animation-delay: 0.2s;">
-                <div class="step-icon">
-                    <img src="/images/uslugi.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
-                </div>
-                <h4>1. Търсене на услуги</h4>
-                <p>Намерете наличните услуги за вашето превозно средство с лекота.</p>
-            </div>
-            <div class="step" style="animation-delay: 0.6s;">
-                <div class="step-icon">
-                    <img src="/images/reservationimage.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
-                </div>
-                <h4>2. Резервация</h4>
-                <p>Изберете удобен час и резервирайте услугата, която ви трябва.</p>
-            </div>
-            <div class="step" style="animation-delay: 0.8s;">
-                <div class="step-icon">
-                    <img src="/images/tick.webp" alt="Търсене на услуги" style="width: 50px; height: 50px;">
-                </div>
-                <h4>3. Получавате потвърждение</h4>
-                <p>Получавате потвърждение и напомняне за вашето обслужване.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Икони за социални мрежи -->
-    <div class="social-icons">
-        <p>Последвайте ни в социалните мрежи:</p>
-        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-    </div>
 </body>
 </html>

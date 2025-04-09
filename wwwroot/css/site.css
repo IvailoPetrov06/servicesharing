@@ -1,38 +1,238 @@
+/* === “Œ◊≈Õ ‘ŒÕ Õ¿ Õ¿¬»√¿÷»ŒÕÕ¿“¿ À≈Õ“¿ === */
 nav.navbar {
-    background-color: #1e1e2f !important;
+    background-color: #202020 !important;
     padding: 12px 20px;
     border-radius: 0 0 12px 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
-.nav-item .nav-link,
-.auth-btn {
-    color: #ffffff !important;
-    background: linear-gradient(145deg, #28a745, #218838) !important;
+/* === Ã≈Õﬁ ≈À≈Ã≈Õ“» (Õ¿◊¿ÀŒ, ”—À”√», œ–Œ‘»À, »«’Œƒ) === */
+.navbar-nav .nav-item .nav-link,
+.auth-links a {
+    background: none !important;
     border: none !important;
-    border-radius: 12px;
-    padding: 10px 20px;
+    color: #bfbfbf !important;
     font-weight: bold;
-    font-size: 1rem;
-    display: flex;
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
-    transition: all 0.3s ease;
+    gap: 6px;
+    transition: color 0.2s ease;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-    .nav-item .nav-link:hover,
-    .auth-btn:hover {
-        background: linear-gradient(145deg, #38c172, #1e7e34) !important;
-        transform: translateY(-2px);
-    }
 
-    .nav-item .nav-link:active,
-    .auth-btn:active {
-        transform: scale(0.98);
-    }
+.navbar-nav .nav-item .nav-link:hover,
+.auth-links a:hover {
+    color: #4CAF50 !important;
+}
+
+.navbar-nav .nav-item .nav-link:active,
+.auth-links a:active {
+    transform: scale(0.98);
+}
 
 .navbar-nav .nav-item {
     margin-right: 14px;
+}
+
+.auth-links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar-nav .nav-item {
+        margin-right: 0 !important;
+        margin-bottom: 6px;
+    }
+
+    .auth-links {
+        margin-top: 10px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar-nav .nav-item .nav-link:hover,
+    .auth-links a:hover {
+        border-radius: 999px !important;
+        padding: 8px 16px !important;
+    }
+}
+
+.navbar-nav .nav-item .nav-link:focus-visible,
+.navbar-nav .nav-item .nav-link:focus,
+.auth-links a:focus,
+.auth-links a:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.custom-footer {
+    background: #202020;
+    color: #dcdcdc;
+    padding: 40px 20px 20px;
+    font-size: 0.95rem;
+}
+
+.footer-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+    border-bottom: 1px solid #444;
+    padding-bottom: 20px;
+}
+
+.footer-section {
+    flex: 1 1 220px;
+    min-width: 200px;
+}
+
+.footer-section h4 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding-left: 0;
+    line-height: 1.8;
+}
+
+.footer-section a {
+    color: #8dd3ff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+    color: #4caf50;
+}
+
+.footer-logo {
+    max-width: 150px;
+    margin-top: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 15px;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+/* === —“»ÀŒ¬≈ «¿ —≈ ÷»ﬂ“¿ " ‡Í ‡·ÓÚË" === */
+.steps-section {
+    background-color: #f4f7fc;
+    padding: 50px 20px 60px;
+    text-align: center;
+}
+
+.steps-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.step-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px 20px;
+    max-width: 280px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+}
+
+.step-card img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.step-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #202020;
+}
+
+.step-card p {
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.btn-secondary {
+    background-color: #4CAF50 !important; /* Set the background color to green */
+    color: white !important; /* Set the text color to white */
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border: none !important; /* Remove border */
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    .btn-secondary:hover {
+        background-color: #45a049 !important; /* Darker green on hover */
+        transform: scale(1.1); /* Slight zoom effect */
+    }
+
+    .btn-secondary:focus,
+    .btn-secondary:active {
+        outline: none !important; /* Remove outline when button is focused or active */
+        box-shadow: none !important; /* Remove any shadow */
+        background-color: #4CAF50 !important; /* Keep background green even when active */
+        color: white !important; /* Ensure text stays white */
+    }
+
+
+    .btn-secondary {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 20px;  /* Reduced padding for smaller size */
+    font-size: 1rem;    /* Slightly smaller font size */
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Adjust the image size in carousel */
+.carousel-inner img {
+    max-height: 400px;   /* Limit the height to match image size preference */
+    object-fit: cover;   /* Ensures image covers the space without stretching */
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black !important; /* Changes the color of the arrows to black */
+}
+.logo-img {
+    height: 165px; /* œÓ-„ÓÎˇÏ ‡ÁÏÂ Á‡ ÎÓ„ÓÚÓ */
+    width: auto;
+    background: transparent;
+    display: block;
+    margin: 0 auto;
 }
