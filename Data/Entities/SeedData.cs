@@ -99,21 +99,21 @@ namespace servicesharing.Data
                 context.Promotions.AddRange(new[]
                 {
             new Promotion
-            {
-                Title = "Отстъпка за смяна на масло",
-                Description = "Вземете 20% намаление до края на месеца!",
-                ValidUntil = DateTime.Now.AddMonths(1),
-                ServiceId = service1.Id,
-                UserId = admin.Id
-            },
-            new Promotion
-            {
-                Title = "Безплатен монтаж на гуми",
-                Description = "Вземи безплатен монтаж при смяна на 4 гуми!",
-                ValidUntil = DateTime.Now.AddDays(10),
-                ServiceId = service2.Id,
-                UserId = admin.Id
-            }
+  {
+      Title = "Отстъпка за смяна на масло",
+      Description = "Вземете 20% намаление до края на месеца!",
+      ValidUntil = DateTime.Now.AddMonths(1),
+      ServiceId = service1.Id,
+      UserId = admin.Id
+  },
+  new Promotion
+  {
+      Title = "Отстъпка за смяна на гуми",
+      Description = "Вземи 15% намаление при смяна на гуми!",
+      ValidUntil = DateTime.Now.AddMonths(2),
+      ServiceId = service2.Id,
+      UserId = admin.Id
+  }
         });
 
                 await context.SaveChangesAsync();

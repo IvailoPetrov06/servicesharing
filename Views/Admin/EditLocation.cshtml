@@ -1,0 +1,39 @@
+﻿@model servicesharing.Data.Entities.Location
+
+@{
+    ViewData["Title"] = "Редактиране на локация";
+}
+
+<h2>Редактиране на сервиз</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Latitude"></label>
+        <input asp-for="Latitude" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Longitude"></label>
+        <input asp-for="Longitude" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Details"></label>
+        <textarea asp-for="Details" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Запази промените</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>

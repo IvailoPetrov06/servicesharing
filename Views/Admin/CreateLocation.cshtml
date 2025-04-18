@@ -1,0 +1,46 @@
+﻿@model servicesharing.Data.Entities.Location
+
+@{
+    ViewData["Title"] = "Добавяне на локация";
+}
+
+<h2>Добавяне на нов сервиз</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Latitude"></label>
+        <input asp-for="Latitude" class="form-control" />
+        <span asp-validation-for="Latitude" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Longitude"></label>
+        <input asp-for="Longitude" class="form-control" />
+        <span asp-validation-for="Longitude" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Details"></label>
+        <textarea asp-for="Details" class="form-control"></textarea>
+        <span asp-validation-for="Details" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Запиши</button>
+    <a asp-action="Index" class="btn btn-success">Назад</a>
+</form>
