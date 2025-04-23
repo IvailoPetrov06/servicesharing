@@ -39,6 +39,7 @@ using (var scope = app.Services.CreateScope())
     await SeedData.SeedLocationsAsync(context);
     await SeedData.SeedServicesAsync(context);
     await SeedData.SeedPromotionsAsync(context, userManager);
+    await SeedData.SeedMechanicRoleOnlyAsync(roleManager);
 }
 
 // Configure the HTTP request pipeline
@@ -101,6 +102,13 @@ public static class SeedData
             }
         }
 
+    }
+    public static async Task SeedMechanicRoleOnlyAsync(RoleManager<IdentityRole> roleManager)
+    {
+        if (!await roleManager.RoleExistsAsync("Автомеханик"))
+        {
+            await roleManager.CreateAsync(new IdentityRole("Автомеханик"));
+        }
     }
     public static async Task SeedPromotionsAsync(AppDbContext context, UserManager<User> userManager)
     {

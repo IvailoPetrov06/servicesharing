@@ -41,6 +41,14 @@ namespace servicesharing.Data
                 }
             }
         }
+        public static async Task SeedMechanicRoleOnlyAsync(RoleManager<IdentityRole> roleManager)
+        {
+            if (!await roleManager.RoleExistsAsync("Автомеханик"))
+            {
+                await roleManager.CreateAsync(new IdentityRole("Автомеханик"));
+            }
+        }
+
         public static async Task SeedLocationsAsync(AppDbContext context)
         {
             var locations = new[]

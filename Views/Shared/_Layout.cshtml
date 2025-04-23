@@ -73,7 +73,14 @@
                                     </a>
                                 </li>
                             }
-                        </ul>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Автомеханик"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-success" asp-controller="Mechanic" asp-action="Dashboard">
+                                        <i class="fas fa-tools"></i> Автомеханик панел
+                                    </a>
+                                </li>
+                            }
                         <ul class="navbar-nav ms-auto d-flex gap-2">
                             @if (User.Identity.IsAuthenticated)
                             {

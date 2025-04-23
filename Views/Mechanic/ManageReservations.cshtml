@@ -1,0 +1,104 @@
+﻿@model List<servicesharing.Data.Entities.Reservation>
+
+@{
+    ViewData["Title"] = "Моите резервации";
+}
+
+<style>
+    body {
+        background-image: url('../images/mechanic-bg.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 30px;
+        margin-top: 40px;
+        border-radius: 10px;
+    }
+
+    h2 {
+        color: #00FFB3;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .table {
+        background-color: white;
+        color: #000;
+    }
+
+        .table thead {
+            background-color: #343a40;
+            color: white;
+        }
+
+    .btn {
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+
+    .form-control {
+        height: 30px;
+        padding: 3px 8px;
+    }
+</style>
+
+<div class="container">
+    <h2 class="text-center">@ViewData["Title"]</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+
+    <table class="table table-bordered table-hover text-center">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Име на клиента</th>
+                <th>Имейл</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr><td colspan="7">Няма налични резервации.</td></tr>
+            }
+            else
+            {
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    var reservation = Model[i];
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@reservation.User?.FullName</td>
+                        <td>@reservation.User?.Email</td>
+                        <td>@reservation.Status</td>
+                        <td>
+                            <form asp-action="ChangeReservationStatus" method="post" style="display:inline-block;">
+                                <input type="hidden" name="reservationId" value="@reservation.Id" />
+                                <select name="newStatus" class="form-control d-inline-block">
+                                    <option value="Pending">Очаква се</option>
+                                    <option value="Completed">Завършена</option>
+                                    <option value="Canceled">Отказана</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary btn-sm mt-1">Промени</button>
+                            </form>
+                            <form asp-action="DeleteConfirmed" method="post" style="display:inline-block;">
+                                <input type="hidden" name="id" value="@reservation.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm mt-1">Изтрий</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

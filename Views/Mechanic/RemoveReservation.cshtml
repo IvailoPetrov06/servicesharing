@@ -1,0 +1,17 @@
+﻿@model servicesharing.Data.Entities.Reservation
+
+@{
+    ViewData["Title"] = "Потвърди изтриване на резервация";
+}
+
+<div class="container mt-5">
+    <h2>@ViewData["Title"]</h2>
+
+    <p>Сигурен ли си, че искаш да изтриеш резервацията за <strong>@Model.User?.FullName</strong>?</p>
+
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger">Да, изтрий</button>
+        <a asp-action="Manage" class="btn btn-secondary">Отказ</a>
+    </form>
+</div>

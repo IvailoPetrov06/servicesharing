@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Автомеханик Панел";
+}
+
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Механик Панел</title>
+    <style>
+        body {
+            background-image: url('../images/pngtree-technology-round-dashboard-image_908915.jpg'); /* Сложи си твоя подходящ фон */
+            background-size: cover;
+            background-attachment: fixed;
+            color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .mechanic-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+            .mechanic-panel h1 {
+                font-size: 2.5rem;
+                color: #00ffcc;
+                margin-bottom: 30px;
+                animation: bounceIn 1.5s ease-out;
+            }
+
+        .menu a {
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 15px 30px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+            .menu a:hover {
+                background-color: #1abc9c;
+                transform: scale(1.1);
+            }
+
+        @@keyframes fadeIn {
+            from
+
+        {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+
+        }
+
+        @@keyframes bounceIn {
+            0%
+
+        {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+        60% {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(1);
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="mechanic-panel">
+        <h1>Автомеханик Панел</h1>
+        <div class="menu">
+            <a href="/MechanicReservation/Manage">Управление на резервации</a>
+        </div>
+    </div>
+</body>
+</html>
